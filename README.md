@@ -52,9 +52,12 @@ If path to pepMANDIS.py is not in your environment PATH, execute it as follows:\
 If the script is in your current working directory:\
 ./pepMANDIS.py [options] -m "desired_molecule_name" 
 
+Help:\
+pepMANDIS -h
+
 # Licence
 
-[GPL Version 3](https://raw.githubusercontent.com/tseemann/snp-dists/master/LICENSE)
+[GPL Version 3](https://github.com/matejmedvecky/pepmandis/blob/master/LICENSE)
 
 # Author
 
@@ -62,5 +65,5 @@ If the script is in your current working directory:\
 
 # Credits
 
-Matej Medvecky
+Matej Medvecky\
 Manolis Mandalakis
