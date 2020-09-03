@@ -1,4 +1,4 @@
-# pepmandis
+# pepMANDIS
 
 PepMANDIS is an automated pipeline that interrogates UniProt or user defined protein database
 and computes several protein/peptide properties and associated statistics to deduce a small
@@ -8,6 +8,8 @@ distributions (Fedora, Ubuntu and CentOS) and macOS (High Sierra).
 
 PLEASE CITE our paper and/or URL to this GitHub repo (https://github.com/matejmedvecky/pepmandis)
 when using PepMANDIS in your work.
+
+# Installation
 
 Following list of dependencies need to be installed prior to start using pepMANDIS:
 
@@ -39,8 +41,15 @@ to be loaded.
 
 Please note that pyOpenMS is published under 3-clause BSD licence (https://opensource.org/licenses/BSD-3-Clause).
 
-TRIVIAL USAGE: pepMANDIS.py [options] -m "desired_molecule_name" (e.g. pepMANDIS.py -m "catechol-1,2-dioxygenase")
+# Quick start
+
+pepMANDIS.py [options] -m "desired_molecule_name"
+e.g. pepMANDIS.py -m "catechol-1,2-dioxygenase"
+
 If path to pepMANDIS.py is not in your environment PATH, execute it as follows:
 /path/to/pepMANDIS.py [options] -m "desired_molecule_name"
-./pepMANDIS.py [options] -m "desired_molecule_name" - if the script is in your current working directory
-FOR HELP: pepMANDIS.py -h
+
+If the script is in your current working directory:
+./pepMANDIS.py [options] -m "desired_molecule_name" - 
+
+
