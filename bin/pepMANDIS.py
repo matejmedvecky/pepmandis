@@ -950,6 +950,10 @@ class MetaproteomicPipline:
 					faFile = open('%s/Peptide_candidates_for_calculations%.2d.faa' % (
 						self.resultsFolder, fileCount), 'w')
 					for relPeptide in self.relevantPeptides:
+						if 'X' in str(relPeptide[0]):
+							sys.stdout.write('Caution: Ommiting peptide %s since it contains amino acid X.\n' % str(relPeptide[0]))
+							sys.stdout.flush()
+							continue
 						if splitIntoMultiFiles:
 							if peptCountPerFile % 51 == 0:
 								fileCount += 1
@@ -995,6 +999,10 @@ class MetaproteomicPipline:
 					faFile = open('%s/Peptide_candidates_for_calculations%.2d.faa' % (
 						self.resultsFolder, fileCount), 'w')
 					for peptide in self.peptideEntries:
+						if 'X' in str(peptide[0]):
+							sys.stdout.write('Caution: Ommiting peptide %s since it contains amino acid X.\n' % str(peptide[0]))
+							sys.stdout.flush()
+							continue
 						if splitIntoMultiFiles:
 							if peptCountPerFile % 51 == 0:
 								fileCount += 1
@@ -1065,11 +1073,15 @@ class MetaproteomicPipline:
 			while True:
 				time.sleep(5)
 				pageSource = driver.page_source
-				status = re.search(r'div class=\"result\"', pageSource)
+				status = re.search(r'div class=\"main\"', pageSource)
 				if status:
 					break
 			resPattern = re.compile(r'.+?PEPTIDE.+?</td><td>(.+?)</td><td>')
 			resPeptides = resPattern.findall(driver.page_source)
+			if not resPeptides:
+				sys.stderr.write('Error: CONSeQuence did not return the results. It provided following output instead (in HTML format):\n')
+				sys.stderr.write(driver.page_source)
+				return False
 			if isExtraInput:
 				peptideEntries = self.relevantPeptides
 			else:
@@ -1608,6 +1620,9 @@ class MetaproteomicPipline:
 			peptideEntries = self.peptideEntries
 		unsuitablePeptCount = 0
 		for peptide in peptideEntries:
+			if 'X' in peptide[0]:
+				unsuitablePeptCount += 1
+				continue
 			if peptide[3] != None:
 				if peptide[3] < detectabilityThres:
 					unsuitablePeptCount += 1
@@ -1637,6 +1652,8 @@ class MetaproteomicPipline:
 				if (peptide[0] in [item[0] for item in selectedPeptides] or
 					peptide[2] <= len(bestNextCandidate[1])):
 						continue
+				if 'X' in peptide[0]:
+					continue
 				if peptide[3] != None:
 					if peptide[3] < detectabilityThres:
 						continue
