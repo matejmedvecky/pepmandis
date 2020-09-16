@@ -28,9 +28,9 @@ Example of installing openssl via homebrew: `brew install openssl`.
 PepMANDIS pipeline uses either Safari or Chrome web browser for performing CONSeQuence analysis
 (prediction of peptide LC-MS/MS detectability), therefore, one of them need to be installed
 on user's computer. Please note that Chrome is the preferred one since Safari cannot be ran
-in the background.
+in the background.\
 Note for Safari users: To enable to control Safari via webdriver, 'Allow Remote Automation' option
-                       in Safari's Develop menu must be enabled.
+                       in Safari's Develop menu must be enabled.\
 Note for Chrome users: User system's ChromeDriver must be compatible with the system's Chrome browser
                        version. ChromeDriver can be downloaded from
                        https://sites.google.com/a/chromium.org/chromedriver/downloads.
