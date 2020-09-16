@@ -43,7 +43,7 @@ Please note that pyOpenMS is published under 3-clause BSD licence (https://opens
 
 # Quick start
 
-pepMANDIS.py [options] -m "desired_molecule_name"\
+`pepMANDIS.py [options] -m "desired_molecule_name"`\
 e.g. `pepMANDIS.py -m "catechol-1,2-dioxygenase"`
 
 If path to pepMANDIS.py is not in your environment PATH, execute it as follows:\
