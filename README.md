@@ -1,4 +1,4 @@
-# pepMANDIS
+# PepMANDIS
 
 PepMANDIS is an automated pipeline that interrogates UniProt or user defined protein database
 and computes several protein/peptide properties and associated statistics to deduce a small
@@ -20,10 +20,10 @@ Following list of dependencies need to be installed prior to start using pepMAND
 - pyopenms
 - selenium
 
-They can be installed via pip (package installer for Python). E.g. 'pip install biopython'.
+They can be installed via pip (package installer for Python). E.g. `pip install biopython`.
 If, after installation of pyopenms, ImportError message (Library not loaded) is risen,
 openssl need to be installed as well.
-Example of installing openssl via homebrew: 'brew install openssl'.
+Example of installing openssl via homebrew: `brew install openssl`.
 
 PepMANDIS pipeline uses either Safari or Chrome web browser for performing CONSeQuence analysis
 (prediction of peptide LC-MS/MS detectability), therefore, one of them need to be installed
@@ -44,16 +44,16 @@ Please note that pyOpenMS is published under 3-clause BSD licence (https://opens
 # Quick start
 
 pepMANDIS.py [options] -m "desired_molecule_name"\
-e.g. pepMANDIS.py -m "catechol-1,2-dioxygenase"
+e.g. `pepMANDIS.py -m "catechol-1,2-dioxygenase"`
 
 If path to pepMANDIS.py is not in your environment PATH, execute it as follows:\
-/path/to/pepMANDIS.py [options] -m "desired_molecule_name"
+`/path/to/pepMANDIS.py [options] -m "desired_molecule_name"`
 
 If the script is in your current working directory:\
-./pepMANDIS.py [options] -m "desired_molecule_name" 
+`./pepMANDIS.py [options] -m "desired_molecule_name"`
 
 Help:\
-pepMANDIS -h
+`pepMANDIS -h`
 
 # Licence
 
