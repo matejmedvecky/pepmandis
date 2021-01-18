@@ -41,7 +41,7 @@ Note for Chrome users: User system's ChromeDriver must be compatible with the sy
                        version. ChromeDriver can be downloaded from
                        https://sites.google.com/a/chromium.org/chromedriver/downloads.
 
-Non-redundant BLAST database can be downloaded via following FTP:  https://ftp.ncbi.nlm.nih.gov/blast/db/ \
+Non-redundant BLAST database can be downloaded via following FTP:  https://ftp.ncbi.nlm.nih.gov/blast/db/. \
 Please note that path to BLAST NR protein DB need to be specified in a 'defaults.cfg' file. 
 
 Newer versions of macOS won't run PeptideSieve since LD_LIBRARY_PATH and DYLD_LIBRARY_PATH cannot be
@@ -53,7 +53,7 @@ Please note that pyOpenMS is published under 3-clause BSD licence (https://opens
 # Quick start
 
 `pepMANDIS.py [options] -m "desired_molecule_name"`\
-e.g. `pepMANDIS.py -m "catechol-1,2-dioxygenase"`
+e.g. `pepMANDIS.py -m "catechol-1,2-dioxygenase"`\
 or  `python pepMANDIS.py -m "catechol-1,2-dioxygenase"`
 
 Help:\
@@ -74,11 +74,11 @@ If the script is in your current working directory, execute it by following way:
 Open the terminal (press Windows+R, type 'cmd' and press Enter).
 
 If path to pepMANDIS.py is not in your environment PATH, execute it as follows:\
-`C:\path\to\pepMANDIS.py [options] -m "desired_molecule_name"`
+`C:\path\to\pepMANDIS.py [options] -m "desired_molecule_name"`\
 or `python C:\path\to\pepMANDIS.py -m "catechol-1,2-dioxygenase"`
 
 If the script is in your current working directory, execute it by following way:\
-`pepMANDIS.py [options] -m "desired_molecule_name"`
+`pepMANDIS.py [options] -m "desired_molecule_name"`\
 or `python pepMANDIS.py -m "catechol-1,2-dioxygenase"`
 
 # Licence
