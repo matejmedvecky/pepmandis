@@ -20,10 +20,10 @@ Following list of dependencies need to be installed prior to start using pepMAND
 - pyopenms
 - selenium
 
-They can be installed via pip (package installer for Python). E.g. `pip install biopython`.
+They can be installed via pip (package installer for Python) in Terminal (i.e. command-line). E.g. `pip install biopython`.
 If, after installation of pyopenms, ImportError message (Library not loaded) is risen,
 openssl need to be installed as well.
-Example of installing openssl via homebrew: `brew install openssl`.
+Example of installing openssl via homebrew in Terminal: `brew install openssl`.
 
 PepMANDIS pipeline uses either Safari or Chrome web browser for performing CONSeQuence analysis
 (prediction of peptide LC-MS/MS detectability), therefore, one of them need to be installed
