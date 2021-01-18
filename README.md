@@ -4,7 +4,7 @@ PepMANDIS is an automated pipeline that interrogates UniProt or user defined pro
 and computes several protein/peptide properties and associated statistics to deduce a small
 list of the most representative, process-specific and MS-amenable peptides for a microbial
 enzymatic activity of interest. It is written in Python3, and was tested on several Linux
-distributions (Fedora, Ubuntu and CentOS) and macOS (High Sierra).
+distributions (Fedora, Ubuntu and CentOS), macOS (High Sierra) and Windows (10).
 
 PLEASE CITE our paper and/or URL to this GitHub repo (https://github.com/matejmedvecky/pepmandis)
 when using PepMANDIS in your work.
@@ -46,14 +46,28 @@ Please note that pyOpenMS is published under 3-clause BSD licence (https://opens
 `pepMANDIS.py [options] -m "desired_molecule_name"`\
 e.g. `pepMANDIS.py -m "catechol-1,2-dioxygenase"`
 
+Help:\
+`pepMANDIS -h`
+
+## Linux and macOS
+
+Open the terminal (press Ctrl+Alt+T in Linux or Command+Space in macOS).
+
 If path to pepMANDIS.py is not in your environment PATH, execute it as follows:\
 `/path/to/pepMANDIS.py [options] -m "desired_molecule_name"`
 
-If the script is in your current working directory:\
+If the script is in your current working directory, execute it by following way:\
 `./pepMANDIS.py [options] -m "desired_molecule_name"`
 
-Help:\
-`pepMANDIS -h`
+## Windows
+
+Open the terminal (press Windows+R, type 'cmd' and press Enter).
+
+If path to pepMANDIS.py is not in your environment PATH, execute it as follows:\
+`C:\path\to\pepMANDIS.py [options] -m "desired_molecule_name"`
+
+If the script is in your current working directory, execute it by following way:\
+`pepMANDIS.py [options] -m "desired_molecule_name"`
 
 # Licence
 
