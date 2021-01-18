@@ -13,14 +13,20 @@ when using PepMANDIS in your work.
 
 Following list of dependencies need to be installed prior to start using pepMANDIS:
 
-- biopython
-- matplotlib
-- multiprocess
-- numpy
-- pyopenms
-- selenium
+- python 3 (3.7.6 macOS)
+- biopython (1.76 macOS)
+- matplotlib (3.1.3 macOS)
+- multiprocess (0.70.9 macOS)
+- numpy (1.18.1 macOS)
+- pyopenms (2.4.0 macOS)
+- selenium (3.141.0 macOS)
 
-They can be installed via pip (package installer for Python) in Terminal (i.e. command-line). E.g. `pip install biopython`.
+
+
+- BLAST+ (2.10.0+ macOS) & BLAST non-redundant protein database
+- PeptideSieve (0.51 macOS)
+
+They can be installed via pip (package installer for Python) in Terminal. E.g. `pip install biopython`.
 If, after installation of pyopenms, ImportError message (Library not loaded) is risen,
 openssl need to be installed as well.
 Example of installing openssl via homebrew in Terminal: `brew install openssl`.
@@ -34,6 +40,9 @@ Note for Safari users: To enable to control Safari via webdriver, 'Allow Remote 
 Note for Chrome users: User system's ChromeDriver must be compatible with the system's Chrome browser
                        version. ChromeDriver can be downloaded from
                        https://sites.google.com/a/chromium.org/chromedriver/downloads.
+
+Non-redundant BLAST database can be downloaded via following FTP:  https://ftp.ncbi.nlm.nih.gov/blast/db/
+Please note that path to BLAST NR protein DB need to be specified in a 'defaults.cfg' file. 
 
 Newer versions of macOS won't run PeptideSieve since LD_LIBRARY_PATH and DYLD_LIBRARY_PATH cannot be
 loaded due to 'System integrity protection'. User must turn it off in order to enable dyld library
