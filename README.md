@@ -51,7 +51,7 @@ Help:\
 
 ## Linux and macOS
 
-Open the terminal (press Ctrl+Alt+T in Linux or Command+Space in macOS).
+Open the terminal (press Ctrl+Alt+T in Linux or press Command+Space, type 'terminal' and press Enter in macOS).
 
 If path to pepMANDIS.py is not in your environment PATH, execute it as follows:\
 `/path/to/pepMANDIS.py [options] -m "desired_molecule_name"`
