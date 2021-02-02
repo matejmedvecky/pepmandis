@@ -26,7 +26,7 @@ Following list of dependencies need to be installed prior to start using pepMAND
 They can be installed via pip (package installer for Python) in Terminal. E.g. `pip install biopython`.
 If, after installation of pyopenms, ImportError message (Library not loaded) is risen,
 openssl needs to be installed as well.
-Example of installing openssl via homebrew in Terminal: `brew install openssl`.\
+Example of installing openssl via homebrew in Terminal: `brew install openssl`.
 
 Terminal can be opened by following ways:\
 Linux: press Ctrl+Alt+T\
