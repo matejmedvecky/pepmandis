@@ -23,13 +23,19 @@ Following list of dependencies need to be installed prior to start using pepMAND
 
 
 
-- BLAST+ (2.10.0+ macOS) & BLAST non-redundant protein database (HIGHLY RECOMMENDED)
+- BLAST+ (2.10.0+ High Sierra) & BLAST non-redundant protein database (HIGHLY RECOMMENDED)
 - PeptideSieve (0.51)
 
 They can be installed via pip (package installer for Python) in Terminal. E.g. `pip install biopython`.
 If, after installation of pyopenms, ImportError message (Library not loaded) is risen,
 openssl need to be installed as well.
 Example of installing openssl via homebrew in Terminal: `brew install openssl`.
+
+PepMANDIS repository with the souce code can be obtained via git:\
+`git clone https://github.com/matejmedvecky/pepmandis.git`\
+Scripts are located in bin directory:\
+Linux/macOS:\
+`cd pepmandis/bin`
 
 PepMANDIS pipeline uses either Safari or Chrome web browser for performing CONSeQuence analysis
 (prediction of peptide LC-MS/MS detectability), therefore, one of them need to be installed
@@ -75,11 +81,11 @@ Open the terminal (press Windows+R, type 'cmd' and press Enter).
 
 If path to pepMANDIS.py is not in your environment PATH, execute it as follows:\
 `C:\path\to\pepMANDIS.py [options] -m "desired_molecule_name"`\
-or `python C:\path\to\pepMANDIS.py -m "catechol-1,2-dioxygenase"`
+or `python C:\path\to\pepMANDIS.py -m "desired_molecule_name"`
 
 If the script is in your current working directory, execute it by following way:\
 `pepMANDIS.py [options] -m "desired_molecule_name"`\
-or `python pepMANDIS.py -m "catechol-1,2-dioxygenase"`
+or `python pepMANDIS.py -m "desired_molecule_name"`
 
 # Licence
 
