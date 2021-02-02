@@ -33,19 +33,6 @@ Linux: press Ctrl+Alt+T\
 macOS: press Command+Space, type `terminal` and press Enter\
 Windows: press Windows+R, type `cmd` and press Enter
 
-## Optional dependencies
-
-- BLAST+ (2.10.0+ High Sierra) & BLAST non-redundant protein database (HIGHLY RECOMMENDED)
-- PeptideSieve (0.51)
-
-## PepMANDIS source code
-
-PepMANDIS repository with the souce code can be obtained via git:\
-`git clone https://github.com/matejmedvecky/pepmandis.git`\
-Scripts are located in bin directory:\
-They can by accessed on Linux/macOS:\
-`cd pepmandis/bin`
-
 PepMANDIS pipeline uses either Safari or Chrome web browser for performing CONSeQuence analysis
 (prediction of peptide LC-MS/MS detectability), therefore, one of them need to be installed
 on user's computer. Please note that Chrome is the preferred one since Safari cannot be ran
@@ -56,6 +43,13 @@ Note for Chrome users: User system's ChromeDriver must be compatible with the sy
                        version. ChromeDriver can be downloaded from
                        https://sites.google.com/a/chromium.org/chromedriver/downloads.
 
+Please note that pyOpenMS is published under 3-clause BSD licence (https://opensource.org/licenses/BSD-3-Clause).
+
+## Optional dependencies
+
+- BLAST+ (2.10.0+ High Sierra) & BLAST non-redundant protein database (HIGHLY RECOMMENDED)
+- PeptideSieve (0.51)
+
 Non-redundant BLAST database can be downloaded via following FTP:  https://ftp.ncbi.nlm.nih.gov/blast/db/. \
 Please note that path to BLAST NR protein DB need to be specified in a 'defaults.cfg' file. 
 
@@ -63,7 +57,13 @@ Newer versions of macOS won't run PeptideSieve since LD_LIBRARY_PATH and DYLD_LI
 loaded due to 'System integrity protection'. User must turn it off in order to enable dyld library
 to be loaded.
 
-Please note that pyOpenMS is published under 3-clause BSD licence (https://opensource.org/licenses/BSD-3-Clause).
+## PepMANDIS source code
+
+PepMANDIS repository with the souce code can be obtained via git:\
+`git clone https://github.com/matejmedvecky/pepmandis.git`\
+Scripts are located in bin directory:\
+They can by accessed on Linux/macOS:\
+`cd pepmandis/bin`
 
 # Quick start
 
