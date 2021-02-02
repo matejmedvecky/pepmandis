@@ -13,6 +13,8 @@ when using PepMANDIS in your work.
 
 Following list of dependencies need to be installed prior to start using pepMANDIS:
 
+## Mandatory dependencies
+
 - python 3 (3.7.6 High Sierra, 3.8.5 Windows 10)
 - biopython (1.76 High Sierra, 1.78 Windows 10)
 - matplotlib (3.1.3 High Sierra, 3.3.3 Windows 10)
@@ -21,20 +23,26 @@ Following list of dependencies need to be installed prior to start using pepMAND
 - pyopenms (2.4.0 High Sierra, 2.6.0 Windows 10)
 - selenium (3.141.0 High Sierra, Windows 10)
 
+They can be installed via pip (package installer for Python) in Terminal. E.g. `pip install biopython`.
+If, after installation of pyopenms, ImportError message (Library not loaded) is risen,
+openssl need to be installed as well.
+Example of installing openssl via homebrew in Terminal: `brew install openssl`.\
+Terminal can be opened by following ways:\
+Linux: press Ctrl+Alt+T\
+macOS: press Command+Space, type `terminal` and press Enter\
+Windows: press Windows+R, type `cmd` and press Enter
 
+## Optional dependencies
 
 - BLAST+ (2.10.0+ High Sierra) & BLAST non-redundant protein database (HIGHLY RECOMMENDED)
 - PeptideSieve (0.51)
 
-They can be installed via pip (package installer for Python) in Terminal. E.g. `pip install biopython`.
-If, after installation of pyopenms, ImportError message (Library not loaded) is risen,
-openssl need to be installed as well.
-Example of installing openssl via homebrew in Terminal: `brew install openssl`.
+## PepMANDIS source code
 
 PepMANDIS repository with the souce code can be obtained via git:\
 `git clone https://github.com/matejmedvecky/pepmandis.git`\
 Scripts are located in bin directory:\
-Linux/macOS:\
+They can by accessed on Linux/macOS:\
 `cd pepmandis/bin`
 
 PepMANDIS pipeline uses either Safari or Chrome web browser for performing CONSeQuence analysis
