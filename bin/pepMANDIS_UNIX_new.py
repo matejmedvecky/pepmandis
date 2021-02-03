@@ -180,7 +180,12 @@ class MetaproteomicPipline:
 				'(E.g. "ENPPVLPK,SGLFTSEELPR").',
 			type=str, required=False, default=None,
 			)
-		parser.add_argument('-d', '--detectability',
+		parser.add_argument('-cd', '--cdetectability',
+			help='Minimum number of ML algorithms (out of 4) from CONSeQence tool predicting that '\
+				'given peptide is detectable by MS. Please note that maximum value is 4. [default: 1]',
+			type=int, required=False, default=1,
+			)
+		parser.add_argument('-pd', '--pdetectability',
 			help='PeptideSieve detectability score threshold. [default: 0.6]',
 			type=float, required=False, default=0.6, metavar="DETECTABILITY_THRESHOLD",
 			)
@@ -744,7 +749,7 @@ class MetaproteomicPipline:
 								'           -b "%s"\n' \
 								'           -k "%s"\n' \
 								'           -s %.3f\n' \
-								'           -d %.3f\n' \
+								'           -pd %.3f\n' \
 					            '           -f %d\n' \
 								'           -n %d\n' \
 								'           -N %d\n' \
@@ -760,7 +765,7 @@ class MetaproteomicPipline:
 						args.offline_blastp, args.run_peptidesieve, args.molecule, args.config,
 						args.length, args.no_putatives, args.utaxonomy, args.cleavages,
 						args.mins, args.maxs, args.btaxonomy, args.ktaxonomy,
-						args.specificity, args.detectability, args.chemmod_filter, args.peptide_calc_count,
+						args.specificity, args.pdetectability, args.chemmod_filter, args.peptide_calc_count,
 						args.peptide_out_count, args.threads, args.timeout, args.min_synname_length,
 						args.in_url, args.in_aa_file, args.in_extra_aa_file, args.in_blastp_file,
 						args.stats_only))
@@ -1130,7 +1135,7 @@ class MetaproteomicPipline:
 				status = re.search(r'div class=\"main\"', pageSource)
 				if status:
 					break
-			resPattern = re.compile(r'.+?PEPTIDE.+?</td><td>(.+?)</td><td>')
+			resPattern = re.compile(r'.+?PEPTIDE.+?</td><td>(.+?)</td><td>0</td><td>(\d)</td>')
 			resPeptides = resPattern.findall(driver.page_source)
 			if not resPeptides:
 				sys.stderr.write('Error: CONSeQuence did not return the results. It provided following output instead (in HTML format):\n')
@@ -1141,15 +1146,18 @@ class MetaproteomicPipline:
 			else:
 				peptideEntries = self.peptideEntries
 			for qPept in self.queryPeptides:
-				if qPept[1] not in resPeptides:
+				isInResPeptides = False
+				for rPept in resPeptides:
+					if rPept[0] == qPept[1]:
+						for peptide in peptideEntries:
+							if peptide[0] == qPept[1]:
+								peptide[4] = int(rPept[1])
+								isInResPeptides = True
+								break
+				if not isInResPeptides:
 					for peptide in peptideEntries:
 						if peptide[0] == qPept[1]:
-							peptide[4] = False
-							break
-				else:
-					for peptide in peptideEntries:
-						if peptide[0] == qPept[1]:
-							peptide[4] = True
+							peptide[4] = 0
 							break
 			sys.stdout.write('Done.\n\n')
 			sys.stdout.flush()
@@ -1653,7 +1661,8 @@ class MetaproteomicPipline:
 
 	def get_print_highest_coverage_peptides(
 			self, getGeneraCoverage, isExtraInput, isNoUsearch, outCount, keyTaxonomy,
-			specificityThres, avoidSpecFiltString, detectabilityThres, ChModCount):
+			specificityThres, avoidSpecFiltString, pDetectabilityThres, cDetectabilityThres,
+			ChModCount):
 		keyTax = []
 		if getGeneraCoverage:
 			sys.stdout.write('Getting highest genera coverage peptides...\n')
@@ -1703,11 +1712,11 @@ class MetaproteomicPipline:
 				unsuitablePeptCount += 1
 				continue
 			if peptide[3] != None:
-				if peptide[3] < detectabilityThres:
+				if peptide[3] < pDetectabilityThres:
 					unsuitablePeptCount += 1
 					continue
 			if peptide[4] != None:
-				if peptide[4] == False:
+				if peptide[4] < cDetectabilityThres:
 					unsuitablePeptCount += 1
 					continue
 			if peptide[5] != None:
@@ -1742,10 +1751,10 @@ class MetaproteomicPipline:
 				if 'X' in peptide[0]:
 					continue
 				if peptide[3] != None:
-					if peptide[3] < detectabilityThres:
+					if peptide[3] < pDetectabilityThres:
 						continue
 				if peptide[4] != None:
-					if peptide[4] == False:
+					if peptide[4] < cDetectabilityThres:
 						continue
 				if peptide[5] != None:
 					isInAvoidList = False
@@ -2004,10 +2013,10 @@ def main():# zunifikovat ci maju funkcie ktore moze returnovat True alebo je to 
 				return False
 		if not mp.print_peptides_complete_info(mp.arguments.extra_input):
 			return False
-		if not mp.get_print_highest_coverage_peptides(True, mp.arguments.extra_input, mp.arguments.no_usearch, mp.arguments.peptide_out_count, mp.arguments.ktaxonomy, mp.arguments.specificity, mp.arguments.avoid_spec_filt_list, mp.arguments.detectability, mp.arguments.chemmod_filter):
+		if not mp.get_print_highest_coverage_peptides(True, mp.arguments.extra_input, mp.arguments.no_usearch, mp.arguments.peptide_out_count, mp.arguments.ktaxonomy, mp.arguments.specificity, mp.arguments.avoid_spec_filt_list, mp.arguments.pdetectability, mp.arguments.cdetectability, mp.arguments.chemmod_filter):
 			return False
 		if not mp.arguments.extra_input or mp.arguments.no_usearch:
-			if not mp.get_print_highest_coverage_peptides(False, mp.arguments.extra_input, mp.arguments.no_usearch, mp.arguments.peptide_out_count, mp.arguments.ktaxonomy, mp.arguments.specificity, mp.arguments.avoid_spec_filt_list, mp.arguments.detectability, mp.arguments.chemmod_filter):
+			if not mp.get_print_highest_coverage_peptides(False, mp.arguments.extra_input, mp.arguments.no_usearch, mp.arguments.peptide_out_count, mp.arguments.ktaxonomy, mp.arguments.specificity, mp.arguments.avoid_spec_filt_list, mp.arguments.pdetectability, mp.arguments.cdetectability, mp.arguments.chemmod_filter):
 				return False
 	sys.stdout.write('\nIf you use PepMANDIS in your research, please CITE our paper:\n\'Medvecky M, Mandalakis M. PepMANDIS: A peptide selection tool for designing function-based targeted proteomic assays in mixed microbial communities\'.\n\n')
 
