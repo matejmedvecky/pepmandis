@@ -42,8 +42,8 @@ __credits__ = ['Matej Medvecky', 'Manolis Mandalakis']
 __license__ = 'GPLv3'
 __maintainer__ = 'Matej Medvecky'
 __email__ = 'mat.medvecky@gmail.com'
-__status__ = 'Development'
-__version__ = '0.1'
+__status__ = 'Production'
+__version__ = '1.0'
 
 
 class MetaproteomicPipline:
@@ -85,7 +85,7 @@ class MetaproteomicPipline:
 			)
 		parser.add_argument('--custom-url',
 			help='UniProt search URL is provided as an argument; program will ' \
-				'extract input sequences using provided URL. --utaxonomy arg is ommited ' \
+				'extract input sequences using provided URL. --utaxonomy arg is omitted ' \
 				'if this argument is specified.',
 			required=False, action='store_true', default=False,
 			)
@@ -174,7 +174,7 @@ class MetaproteomicPipline:
 			type=float, required=False, default=90.0, metavar="SPECIFICITY_THRESHOLD",
 			)
 		parser.add_argument('-a', '--avoid-spec-filt-list',
-			help='Provide a list of peptides for that specificity scores are ommited. ' \
+			help='Provide a list of peptides for that specificity scores are omitted. ' \
 				'I.e. specificity score-based filtering step will not apply for such peptides. ' \
 				'Bound specified peptides by quotes and separate individual entries by comma ' \
 				'(E.g. "ENPPVLPK,SGLFTSEELPR").',
@@ -312,7 +312,7 @@ class MetaproteomicPipline:
 			sys.stderr.write('Error: Cannot connect to UniProt server. Exiting... ' \
 				'Try again later.\n')
 			return False
-		sys.stdout.write('Done.\n')
+		sys.stdout.write('Done.\n\n')
 		sys.stdout.flush()
 		return rawData
 
@@ -355,7 +355,7 @@ class MetaproteomicPipline:
 				sys.stderr.write('Error: Wrong UniProt tab data format. Probably some' \
 					' Uniprot data are missing. Exiting...\n')
 				return False
-		sys.stdout.write('Done.\n')
+		sys.stdout.write('Done.\n\n')
 		sys.stdout.flush()
 		if not self.proteinEntries:
 			sys.stderr.write('Error: Raw UniProt data were obtained, however,' \
@@ -387,7 +387,7 @@ class MetaproteomicPipline:
 		except OSError:
 			sys.stderr.write('Error: Could not open %s file for writing. Exiting...\n' % protFile)
 			return False
-		sys.stdout.write('Done.\n')
+		sys.stdout.write('Done.\n\n')
 		sys.stdout.flush()
 		return True
 
@@ -467,7 +467,7 @@ class MetaproteomicPipline:
 			return False
 		finally:
 			inFile.close()
-		sys.stdout.write('Done.\n')
+		sys.stdout.write('Done.\n\n')
 		sys.stdout.flush()
 		return True
 
@@ -541,7 +541,7 @@ class MetaproteomicPipline:
 			return False
 		finally:
 			inFile.close()
-		sys.stdout.write('Done.\n')
+		sys.stdout.write('Done.\n\n')
 		sys.stdout.flush()
 		return extraProteins
 
@@ -716,7 +716,7 @@ class MetaproteomicPipline:
 				phylum[1:],
 				key=lambda x_dic: sum(x_dic[1].values()),
 				reverse=True)
-		sys.stdout.write('Done.\n')
+		sys.stdout.write('Done.\n\n')
 		sys.stdout.flush()
 
 	def print_general_stats(
@@ -833,7 +833,7 @@ class MetaproteomicPipline:
 					10,
 					1.1)
 				self.draw_len_histogram(args.molecule, allMin, allMax, removedProteinLengths)
-				sys.stdout.write('Done.\n')
+				sys.stdout.write('Done.\n\n')
 				sys.stdout.flush()
 		except OSError:
 			sys.stderr.write('Error: Could not open %s/initial_info.txt file for writing.' % self.resultsFolder)
@@ -860,7 +860,7 @@ class MetaproteomicPipline:
 			sys.stderr.write('Error: All the protein entries were removed during initial filtering steps. ' \
 				'Try to modify argument values. Exiting...\n')
 			return False
-		sys.stdout.write('Done.\n')
+		sys.stdout.write('Done.\n\n')
 		sys.stdout.flush()
 		self.extract_taxonomy_stats()
 		self.print_general_stats(
@@ -878,7 +878,7 @@ class MetaproteomicPipline:
 			digestor.digest(aaSeq, rawPeptides)
 		except:
 			sys.stdout.write('Caution! There are problems with the digestion of protein %s.' \
-				'Ommiting this protein...\n' % seq)
+				'Omitting this protein...\n' % seq)
 			sys.stdout.flush()
 			return ''
 		for entry in rawPeptides:
@@ -891,7 +891,7 @@ class MetaproteomicPipline:
 		sys.stdout.flush()
 		for entry in self.proteinEntries:
 			entry[6] = self.digest_protein(entry[5], cleav, minPep, maxPep)
-		sys.stdout.write('Done.\n')
+		sys.stdout.write('Done.\n\n')
 		sys.stdout.flush()
 
 	def run_extra_protein_digestion(self, cleav, minPep, maxPep):
@@ -908,7 +908,7 @@ class MetaproteomicPipline:
 						break
 				if not isInEPlist:
 					extraPeptides.append([peptide.decode(), int(round(entry[1])), 1, None, None, None, None])
-		sys.stdout.write('Done.\n')
+		sys.stdout.write('Done.\n\n')
 		sys.stdout.flush()
 		return extraPeptides
 
@@ -945,7 +945,7 @@ class MetaproteomicPipline:
 			traceback.print_exc()
 			sys.stderr.write('Error: Unexpected error occured. Exiting...\n')
 			return False
-		sys.stdout.write('Done.\n')
+		sys.stdout.write('Done.\n\n')
 		sys.stdout.flush()
 		return True
 
@@ -968,7 +968,7 @@ class MetaproteomicPipline:
 		except OSError:
 			sys.stderr.write('Error: Could not open %s file.' % peptideSieveFile)
 			return False
-		sys.stdout.write('Done.\n')
+		sys.stdout.write('Done.\n\n')
 		sys.stdout.flush()
 		return True
 
@@ -981,7 +981,7 @@ class MetaproteomicPipline:
 				if extraPeptide[0] == peptide[0] and len(extraPeptide[0]) == len(peptide[0]):
 					relevantPeptides.append(extraPeptide)
 		relevantPeptides.sort(key=lambda x: x[1], reverse=True)
-		sys.stdout.write('Done.\n')
+		sys.stdout.write('Done.\n\n')
 		sys.stdout.flush()
 		return relevantPeptides
 
@@ -998,7 +998,7 @@ class MetaproteomicPipline:
 						self.resultsFolder, fileCount), 'w')
 					for relPeptide in self.relevantPeptides:
 						if 'X' in str(relPeptide[0]):
-							sys.stdout.write('Caution: Ommiting peptide %s since it contains amino acid X.\n' % str(relPeptide[0]))
+							sys.stdout.write('Caution: Omitting peptide %s since it contains amino acid X.\n' % str(relPeptide[0]))
 							sys.stdout.flush()
 							continue
 						if splitIntoMultiFiles:
@@ -1025,7 +1025,7 @@ class MetaproteomicPipline:
 							faFile.close()
 							break
 					faFile.close()
-					sys.stdout.write('Done.\n')
+					sys.stdout.write('Done.\n\n')
 					sys.stdout.flush()
 					return True
 				except OSError:
@@ -1050,7 +1050,7 @@ class MetaproteomicPipline:
 						self.resultsFolder, fileCount), 'w')
 					for peptide in self.peptideEntries:
 						if 'X' in str(peptide[0]):
-							sys.stdout.write('Caution: Ommiting peptide %s since it contains amino acid X.\n' % str(peptide[0]))
+							sys.stdout.write('Caution: Omitting peptide %s since it contains amino acid X.\n' % str(peptide[0]))
 							sys.stdout.flush()
 							continue
 						if splitIntoMultiFiles:
@@ -1077,7 +1077,7 @@ class MetaproteomicPipline:
 							faFile.close()
 							break
 					faFile.close()
-					sys.stdout.write('Done.\n')
+					sys.stdout.write('Done.\n\n')
 					sys.stdout.flush()
 					return True
 				except OSError:
@@ -1151,7 +1151,7 @@ class MetaproteomicPipline:
 						if peptide[0] == qPept[1]:
 							peptide[4] = True
 							break
-			sys.stdout.write('Done.\n')
+			sys.stdout.write('Done.\n\n')
 			sys.stdout.flush()
 			return True
 		except:
@@ -1176,7 +1176,7 @@ class MetaproteomicPipline:
 			traceback.print_exc()
 			sys.stderr.write('Error: Could not run PeptideSieve.\n')
 			return False
-		sys.stdout.write('Done.\n')
+		sys.stdout.write('Done.\n\n')
 		sys.stdout.flush()
 		return True
 
@@ -1218,7 +1218,11 @@ class MetaproteomicPipline:
 			sys.stderr.write('Error: Could not open %s/possible_chemical_modifications.txt file for writing. Exiting...\n'
 				% self.resultsFolder)
 			return False
-		sys.stdout.write('Done.\n')
+		except:
+			traceback.print_exc()
+			sys.stderr.write('Error: Unexpected error occurred. Exiting...\n')
+			return False
+		sys.stdout.write('Done.\n\n')
 		sys.stdout.flush()
 		return True
 
@@ -1359,7 +1363,7 @@ class MetaproteomicPipline:
 		except OSError:
 			sys.stderr.write('Error: Could not open %s file for reading. Exiting...\n' % inBlastFile)
 			return False
-		sys.stdout.write('Done...\n')
+		sys.stdout.write('Done.\n\n')
 		sys.stdout.flush()
 		return True
 
@@ -1376,64 +1380,61 @@ class MetaproteomicPipline:
 							peptideEntries = self.relevantPeptides
 						else:
 							peptideEntries = self.peptideEntries
-						try:###
-							peptMissingInBlastResFile = []
-							for record in NCBIXML.parse(inFile):
-								if not record.alignments:
-									sys.stdout.write('Warning: Peptide %s is lacking alignments in' \
-										' blastp_results.xml file therefore it is skipped from' \
-										' specificity calculation. Try to re-run the analysis' \
-										' in order to get the alignments.\n' % record.query)
-									sys.stdout.flush()
-									continue
-								isInBlastResults = False
-								for qPept in self.queryPeptides:
-									if qPept[0].lstrip('>') == record.query:
-										currentPept = qPept
-										isInBlastResults = True
-								if not isInBlastResults:
-									peptMissingInBlastResFile.append(record.query)
-									continue
-								for align in record.alignments:
-									for hsp in align.hsps:
-										if hsp.match == currentPept[1] and record.query_length == len(currentPept[1]):
-											if (re.search(
-													re.sub('[^a-zA-Z0-9]', '', mol).upper(),
-													re.sub('[^a-zA-Z0-9]', '', align.title).upper())):
-												for name in re.split('>.+?\s|;|(?<=\D), ', align.title):
-													name = re.sub(
-														'\[.+?\]|gi\|.+?\s|ref\|.+?\s|gb\|.+?\s|emb\|.+?\s|tpg\|.+?\s' \
-															'|dbj\|.+?\s|sp\|.+?\s|MULTISPECIES:|RecName: Full=|AltName: Full=',
-														'',
-														name)
-													if (re.sub('[^a-zA-Z0-9]+', ' ', name).upper().strip() not in
-															synNames and not re.search(
-															'HYPOTHETICAL PROTEIN|UNCHARACTERIZED PROTEIN|' \
-																'UNCHARACTERIZED CONSERVED PROTEIN|PARTIAL',
-															re.sub('[^a-zA-Z0-9]+', ' ', name).upper().strip())):
-														wordCount = 0
-														isSynonymous = False
-														for word in re.split(
-																'(?<=\D) ',
-																re.sub('[^a-zA-Z0-9]+', ' ', name).upper().strip()):
-															wordCount += 1
-															if re.search(r'\b%s\b' % re.escape(word), re.sub(
-																	'[^a-zA-Z0-9]+', ' ', mol).upper()):
-																isSynonymous = True
-														if wordCount >= minSynNameLength and isSynonymous:
-															synNames.append(re.sub(
-																'[^a-zA-Z0-9]+', ' ', name).upper().strip())
-										break##
-						except:
-							traceback.print_exc()
-							sys.stderr.write('Error: Unspecified error while parsing file %s and calculating '
-								'specificity values. Exiting...\n' % inFile)
-							return False
+						peptMissingInBlastResFile = []
+						alnMissingInBlastResFile = []
+						for record in NCBIXML.parse(inFile):
+							if not record.alignments:
+								alnMissingInBlastResFile.append(record.query)
+								continue
+							isInBlastResults = False
+							for qPept in self.queryPeptides:
+								if qPept[0].lstrip('>') == record.query:
+									currentPept = qPept
+									isInBlastResults = True
+							if not isInBlastResults:
+								peptMissingInBlastResFile.append(record.query)
+								continue
+							for align in record.alignments:
+								for hsp in align.hsps:
+									if hsp.match == currentPept[1] and record.query_length == len(currentPept[1]):
+										if (re.search(
+												re.sub('[^a-zA-Z0-9]', '', mol).upper(),
+												re.sub('[^a-zA-Z0-9]', '', align.title).upper())):
+											for name in re.split('>.+?\s|;|(?<=\D), ', align.title):
+												name = re.sub(
+													'\[.+?\]|gi\|.+?\s|ref\|.+?\s|gb\|.+?\s|emb\|.+?\s|tpg\|.+?\s' \
+														'|dbj\|.+?\s|sp\|.+?\s|MULTISPECIES:|RecName: Full=|AltName: Full=',
+													'',
+													name)
+												if (re.sub('[^a-zA-Z0-9]+', ' ', name).upper().strip() not in
+														synNames and not re.search(
+														'HYPOTHETICAL PROTEIN|UNCHARACTERIZED PROTEIN|' \
+															'UNCHARACTERIZED CONSERVED PROTEIN|PARTIAL',
+														re.sub('[^a-zA-Z0-9]+', ' ', name).upper().strip())):
+													wordCount = 0
+													isSynonymous = False
+													for word in re.split(
+															'(?<=\D) ',
+															re.sub('[^a-zA-Z0-9]+', ' ', name).upper().strip()):
+														wordCount += 1
+														if re.search(r'\b%s\b' % re.escape(word), re.sub(
+																'[^a-zA-Z0-9]+', ' ', mol).upper()):
+															isSynonymous = True
+													if wordCount >= minSynNameLength and isSynonymous:
+														synNames.append(re.sub(
+															'[^a-zA-Z0-9]+', ' ', name).upper().strip())
+									break##
+						if alnMissingInBlastResFile:
+							sys.stdout.write('Warning: Following peptides are lacking alignments in' \
+								' blastp_results.xml file, therefore they are omitted from' \
+								' specificity score calculations. Try to re-run the analysis' \
+								' in order to get the alignments.\n%s\n\n' % alnMissingInBlastResFile)
+							sys.stdout.flush()
 						if peptMissingInBlastResFile:
 							sys.stderr.write('Caution: Following list of query peptide headers from provided' \
 								' blastp_results.xml file do not occur within the list of peptide entries' \
 								' digested and selected from input proteins. Did you specify correct' \
-								' blastp_results.xml file?\n%s\n' % peptMissingInBlastResFile)
+								' blastp_results.xml file?\n%s\n\n' % peptMissingInBlastResFile)
 							sys.stdout.flush()
 						specFile.write('List of detected synonymous names to \'%s\':\n' % mol)
 						for synName in synNames:
@@ -1442,169 +1443,168 @@ class MetaproteomicPipline:
 							' # # # # # # # # # # # # # # # # # # # # # #\n\n')
 						inFile.seek(0)
 						currentPept = []
-						try:
-							for record in NCBIXML.parse(inFile):
-								fullMatchCount = 0
-								goodProteinCount = 0
-								hypoProteinCount = 0
-								specScore = [100.0, 0.0]
-								diffNames = []
-								if not record.alignments:
-									continue
-								isInBlastResults = False
-								for qPept in self.queryPeptides:
-									if qPept[0].lstrip('>') == record.query:
-										currentPept = qPept
-										isInBlastResults = True
-								if not isInBlastResults:
-									continue
-								for align in record.alignments:
-									matchedSynName = False
-									for hsp in align.hsps:
-										if hsp.match == currentPept[1] and record.query_length == len(currentPept[1]):
-											fullMatchCount += 1
-											for name in synNames:
-												if (re.search(name, re.sub(
-														'[^a-zA-Z0-9]+', ' ', align.title).upper())):
-													goodProteinCount += 1
-													matchedSynName = True
-													break
-											if not matchedSynName:
-												if re.search(
-														'HYPOTHETICAL PROTEIN|UNCHARACTERIZED PROTEIN|' \
-															'UNCHARACTERIZED CONSERVED PROTEIN',
-														re.sub('[^a-zA-Z0-9]', ' ', align.title).upper()):
-													hypoProteinCount += 1
+						for record in NCBIXML.parse(inFile):
+							fullMatchCount = 0
+							goodProteinCount = 0
+							hypoProteinCount = 0
+							specScore = [100.0, 0.0]
+							diffNames = []
+							if not record.alignments:
+								continue
+							isInBlastResults = False
+							for qPept in self.queryPeptides:
+								if qPept[0].lstrip('>') == record.query:
+									currentPept = qPept
+									isInBlastResults = True
+							if not isInBlastResults:
+								continue
+							for align in record.alignments:
+								matchedSynName = False
+								for hsp in align.hsps:
+									if hsp.match == currentPept[1] and record.query_length == len(currentPept[1]):
+										fullMatchCount += 1
+										for name in synNames:
+											if (re.search(name, re.sub(
+													'[^a-zA-Z0-9]+', ' ', align.title).upper())):
+												goodProteinCount += 1
+												matchedSynName = True
+												break
+										if not matchedSynName:
+											if re.search(
+													'HYPOTHETICAL PROTEIN|UNCHARACTERIZED PROTEIN|' \
+														'UNCHARACTERIZED CONSERVED PROTEIN',
+													re.sub('[^a-zA-Z0-9]', ' ', align.title).upper()):
+												hypoProteinCount += 1
+											else:
+												diffNames.append(align.title)
+									break
+							specFile.write('Peptide: %s\nNumber of full query matches: %d/100\n' % (
+								currentPept[1], fullMatchCount))
+							if fullMatchCount != 0:
+								specScore[1] = 100.0 / fullMatchCount
+							if diffNames:
+								bestMatches = []
+								for diffName in diffNames:
+									matches = []
+									bestMatches.append(['', '', 0, 0])# best diffName, synName, shared words count, number of synName's words
+									for name in re.split('>.+?\s|;|(?<=\D), ', diffName):
+										name = re.sub(
+											'\[.+?\]|gi\|.+?\s|ref\|.+?\s|gb\|.+?\s|emb\|.+?\s|tpg\|.+?\s|dbj\|.+?\s|sp\|.+?\s' \
+											'|MULTISPECIES:|RecName: Full=|AltName: Full=',
+											'',
+											name)
+										for synName in synNames:
+											matches.append([
+												re.sub('[^a-zA-Z0-9]+', ' ', name).upper().strip(),
+												synName,
+												0,
+												0,
+												])
+											for entry in re.split('(?<=\D) ', synName):
+												matches[-1][3] += 1
+											for word in re.split(
+													'(?<=\D) ',
+													re.sub('[^a-zA-Z0-9]+', ' ', name).upper().strip()):
+												if re.search(r'\b%s\b' % re.escape(word), synName):
+													matches[-1][2] += 1
+										for match in matches:
+											if match[2] == 0 and bestMatches[-1][2] == 0:
+												if bestMatches[-1][0] == '':
+													bestMatches[-1][0] = match[0]
 												else:
-													diffNames.append(align.title)
-										break
-								specFile.write('Peptide: %s\nNumber of full query matches: %d/100\n' % (
-									currentPept[1], fullMatchCount))
-								if fullMatchCount != 0:
-									specScore[1] = 100.0 / fullMatchCount
-								if diffNames:
-									bestMatches = []
-									for diffName in diffNames:
-										matches = []
-										bestMatches.append(['', '', 0, 0])# best diffName, synName, shared words count, number of synName's words
-										for name in re.split('>.+?\s|;|(?<=\D), ', diffName):
-											name = re.sub(
-												'\[.+?\]|gi\|.+?\s|ref\|.+?\s|gb\|.+?\s|emb\|.+?\s|tpg\|.+?\s|dbj\|.+?\s|sp\|.+?\s' \
-												'|MULTISPECIES:|RecName: Full=|AltName: Full=',
-												'',
-												name)
-											for synName in synNames:
-												matches.append([
-													re.sub('[^a-zA-Z0-9]+', ' ', name).upper().strip(),
-													synName,
-													0,
-													0,
-													])
-												for entry in re.split('(?<=\D) ', synName):
-													matches[-1][3] += 1
-												for word in re.split(
-														'(?<=\D) ',
-														re.sub('[^a-zA-Z0-9]+', ' ', name).upper().strip()):
-													if re.search(r'\b%s\b' % re.escape(word), synName):
-														matches[-1][2] += 1
-											for match in matches:
-												if match[2] == 0 and bestMatches[-1][2] == 0:
-													if bestMatches[-1][0] == '':
-														bestMatches[-1][0] = match[0]
-													else:
-														nameAlreadyContained = False
-														for entry in re.split(' \| ', bestMatches[-1][0]):
-															if entry == match[0]:
-																nameAlreadyContained = True
-														if not nameAlreadyContained:
-															bestMatches[-1][0] += ' | ' + match[0]
-												elif match[2] != 0 and bestMatches[-1][2] == 0:
-													bestMatches[-1][0] = match[0]
-													bestMatches[-1][1] = match[1]
-													bestMatches[-1][2] = match[2]
-													bestMatches[-1][3] = match[3]
-												elif (((float(match[2]) / match[3])
-													> (float(bestMatches[-1][2]) / bestMatches[-1][3])) or
-													((float(match[2]) / match[3])
-													== (float(bestMatches[-1][2]) / bestMatches[-1][3]) and
-													match[2] > bestMatches[-1][2])):
-													bestMatches[-1][0] = match[0]
-													bestMatches[-1][1] = match[1]
-													bestMatches[-1][2] = match[2]
-													bestMatches[-1][3] = match[3]
-									bestMatches.sort(key = lambda x: int(x[2]), reverse = True)
-									diffProteinCount = 0
-									partDiffProteinCount = 0
+													nameAlreadyContained = False
+													for entry in re.split(' \| ', bestMatches[-1][0]):
+														if entry == match[0]:
+															nameAlreadyContained = True
+													if not nameAlreadyContained:
+														bestMatches[-1][0] += ' | ' + match[0]
+											elif match[2] != 0 and bestMatches[-1][2] == 0:
+												bestMatches[-1][0] = match[0]
+												bestMatches[-1][1] = match[1]
+												bestMatches[-1][2] = match[2]
+												bestMatches[-1][3] = match[3]
+											elif (((float(match[2]) / match[3])
+												> (float(bestMatches[-1][2]) / bestMatches[-1][3])) or
+												((float(match[2]) / match[3])
+												== (float(bestMatches[-1][2]) / bestMatches[-1][3]) and
+												match[2] > bestMatches[-1][2])):
+												bestMatches[-1][0] = match[0]
+												bestMatches[-1][1] = match[1]
+												bestMatches[-1][2] = match[2]
+												bestMatches[-1][3] = match[3]
+								bestMatches.sort(key = lambda x: int(x[2]), reverse = True)
+								diffProteinCount = 0
+								partDiffProteinCount = 0
+								for bMatch in bestMatches:
+									if bMatch[2] > 0:
+										if bMatch[2] == bMatch[3]:
+											goodProteinCount += 1
+										else:
+											partDiffProteinCount += 1
+									else:
+										diffProteinCount += 1
+								specFile.write('Number of \'%s\' or synonymous protein names in' \
+									' full query matches: %d\nNumber of hypothetical proteins in' \
+									' full query matches: %d\n' % (
+									mol, goodProteinCount, hypoProteinCount))
+								specFile.write('Number of partially different protein names in' \
+									' full query matches: %d\nNumber of different protein names in' \
+									' full query matches: %d\n' % (
+									partDiffProteinCount, diffProteinCount))
+								specScore[0] -= diffProteinCount * specScore[1]
+								if bestMatches[0][2] > 0:
+									firstPartDiffProt = True
 									for bMatch in bestMatches:
 										if bMatch[2] > 0:
-											if bMatch[2] == bMatch[3]:
-												goodProteinCount += 1
-											else:
-												partDiffProteinCount += 1
-										else:
-											diffProteinCount += 1
-									specFile.write('Number of \'%s\' or synonymous protein names in' \
-										' full query matches: %d\nNumber of hypothetical proteins in' \
-										' full query matches: %d\n' % (
-										mol, goodProteinCount, hypoProteinCount))
-									specFile.write('Number of partially different protein names in' \
-										' full query matches: %d\nNumber of different protein names in' \
-										' full query matches: %d\n' % (
-										partDiffProteinCount, diffProteinCount))
-									specScore[0] -= diffProteinCount * specScore[1]
-									if bestMatches[0][2] > 0:
-										firstPartDiffProt = True
-										for bMatch in bestMatches:
-											if bMatch[2] > 0:
-												if bMatch[2] != bMatch[3]:
-													if firstPartDiffProt == True:
-														firstPartDiffProt = False
-														specFile.write('List of partially different' \
-															' protein names:\n')
-													specFile.write('%s --> matches %d/%d words in %s\n' % (
-														bMatch[0], bMatch[2], bMatch[3], bMatch[1]))
-													specScore[0] -= ((float(bMatch[2])
-																	/ bMatch[3])
-																	* specScore[1])
-									if bestMatches[-1][2] == 0:
-										specFile.write('List of different protein names:\n')
-										for bMatch in bestMatches:
-											if bMatch[2] == 0:
-												specFile.write('%s\n' % (bMatch[0]))
-								else:
-									specFile.write('Number of \'%s\' or synonymous protein names in' \
-										' full query matches: %d\nNumber of hypothetical proteins in' \
-										' full query matches: %d\n' % (
-										mol, goodProteinCount, hypoProteinCount))
-									specFile.write('Number of partially different protein names in' \
-										' full query matches: 0\nNumber of different protein names in' \
-										' full query matches: 0\n')
-								specFile.write('Score out of 100: %.1f\n\n' % specScore[0])
-								isInPeptideEntries = False
-								for entry in peptideEntries:
-									if entry[0] == currentPept[1] and len(currentPept[1]) == len(entry[0]):
-										entry[5] = specScore[0]
-										isInPeptideEntries = True
-										break
-								if not isInPeptideEntries:
-									sys.stderr.write('Caution: Query peptide %s from provided' \
-									 	' blastp_results.xml file does not occur within the list' \
-										' of peptide entries generated from input proteins. Did' \
-										' you specify correct blastp_results.xml file?\n' % hsp.query)
-									sys.stdout.flush()
-						except:
-							traceback.print_exc()
-							sys.stderr.write('Error: Unspecified error while parsing file %s and calculating '
-								'specificity values. Exiting...\n' % inFile)
-							return False
+											if bMatch[2] != bMatch[3]:
+												if firstPartDiffProt == True:
+													firstPartDiffProt = False
+													specFile.write('List of partially different' \
+														' protein names:\n')
+												specFile.write('%s --> matches %d/%d words in %s\n' % (
+													bMatch[0], bMatch[2], bMatch[3], bMatch[1]))
+												specScore[0] -= ((float(bMatch[2])
+																/ bMatch[3])
+																* specScore[1])
+								if bestMatches[-1][2] == 0:
+									specFile.write('List of different protein names:\n')
+									for bMatch in bestMatches:
+										if bMatch[2] == 0:
+											specFile.write('%s\n' % (bMatch[0]))
+							else:
+								specFile.write('Number of \'%s\' or synonymous protein names in' \
+									' full query matches: %d\nNumber of hypothetical proteins in' \
+									' full query matches: %d\n' % (
+									mol, goodProteinCount, hypoProteinCount))
+								specFile.write('Number of partially different protein names in' \
+									' full query matches: 0\nNumber of different protein names in' \
+									' full query matches: 0\n')
+							specFile.write('Score out of 100: %.1f\n\n' % specScore[0])
+							isInPeptideEntries = False
+							for entry in peptideEntries:
+								if entry[0] == currentPept[1] and len(currentPept[1]) == len(entry[0]):
+									entry[5] = specScore[0]
+									isInPeptideEntries = True
+									break
+							if not isInPeptideEntries:
+								sys.stderr.write('Caution: Query peptide %s from provided' \
+								 	' blastp_results.xml file does not occur within the list' \
+									' of peptide entries generated from input proteins. Did' \
+									' you specify correct blastp_results.xml file?\n' % hsp.query)
+								sys.stdout.flush()
 				except OSError:
 					sys.stderr.write('Error: Could not open %s/peptide_blastp_specificity.txt file for writing. Exiting...\n'
 						% self.resultsFolder)
 					return False
+				except:
+					traceback.print_exc()
+					sys.stderr.write('Error: Unspecified error while parsing file %s and calculating '
+						'specificity values. Exiting...\n' % inFile)
+					return False
 		except OSError:
 			sys.stderr.write('Error: Could not open %s file for reading. Exiting...\n' % inBlastFile)
 			return False
-		sys.stdout.write('Done.\n')
+		sys.stdout.write('Done.\n\n')
 		sys.stdout.flush()
 		return True
 
@@ -1618,7 +1618,7 @@ class MetaproteomicPipline:
 					'representing taxonomy\n')
 				if isExtraInput:
 					peptideEntries = self.relevantPeptides
-					sys.stdout.write('Caution: Metagenomic input. Ommiting peptides derived from Uniprot ' \
+					sys.stdout.write('Caution: Metagenomic input. Omitting peptides derived from Uniprot ' \
 						'that do not match metagenomic data.\n')
 					sys.stdout.flush()
 				else:
@@ -1647,7 +1647,7 @@ class MetaproteomicPipline:
 			sys.stderr.write('Error: Could not open %s/Peptides_complete_info.txt file for writing. Exiting...\n'
 				% self.resultsFolder)
 			return False
-		sys.stdout.write('Done.\n')
+		sys.stdout.write('Done.\n\n')
 		sys.stdout.flush()
 		return True
 
@@ -1908,7 +1908,7 @@ class MetaproteomicPipline:
 				' detectability values (they are probably out of --peptide-calc-count' \
 				' range). Therefore they could be not amenable to LC-MS/MS analysis!\n%s\n' % selPeptWithNoDetScores)
 			sys.stderr.flush()
-		sys.stdout.write('Done.\n')
+		sys.stdout.write('Done.\n\n')
 		sys.stdout.flush()
 		return True
 
