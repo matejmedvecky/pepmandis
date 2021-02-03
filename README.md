@@ -96,7 +96,7 @@ If the script is in your current working directory, execute it by following way:
 `pepMANDIS.py [options] -m "desired_molecule_name"`\
 or `python pepMANDIS.py -m "desired_molecule_name"`
 
-## Options
+# Options
 
 - `-m`, `--molecule`: Specify protein name bounded by quotes (e.g. "catechol 1,2-dioxygenase") \
   that is used to programmatically query UniProt database and retrieve all relevant \
