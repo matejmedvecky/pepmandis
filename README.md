@@ -108,3 +108,7 @@ or `python pepMANDIS.py -m "desired_molecule_name"`
 
 Matej Medvecky\
 Manolis Mandalakis
+
+# Citation
+
+Medvecky M, Mandalakis M. PepMANDIS: A peptide selection tool for designing function-based targeted proteomic assays in mixed microbial communities. *Currently under revision.*
