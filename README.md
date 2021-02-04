@@ -130,9 +130,8 @@ or `python pepMANDIS.py -m "desired_molecule_name"`
   [default: ./defaults.cfg (current working directory)].
 
 - `-l`, `--length`: Coefficient of allowed length variation of entries. Allowed \
-				'lengths interval = (median length value) +- (coefficient of l \
-				'variation)\*(median length value). Entries with higher length \
-				'difference are removed. [default: 0.25]
+  lengths interval = (median length value) +- (coefficient of l variation)\*(median length value). Entries with higher length \
+  difference are removed. [default: 0.25]
 
 - `--no-putatives`: Use this option if putative molecules from UniProt search should \
   be removed.
@@ -219,6 +218,30 @@ or `python pepMANDIS.py -m "desired_molecule_name"`
   run. Applicable only if `--no-bsearch` argument is specified.
 
 - `--stats-only`: Print general info, protein statistics and figures, and exit.
+
+## Examples of advanced usage
+
+Gather catechol-1,2-dioxygenase protein entries from UniProt DB, compute basic statistics and exit program:\
+`pepMANDIS_UNIX.py -m "catechol-1,2-dioxygenase" --stats-only`
+
+Use offline blasting:\
+`pepMANDIS_UNIX.py -m "catechol-1,2-dioxygenase" --offline-blastp`
+
+Proteins from file 'extraProteins.faa' will be compared against entries gathered from UniProt DB, set length variation coefficient to 1 (i.e. do not 
+filter proteins according to their lengths):\
+`pepMANDIS_UNIX.py -m "catechol-1,2-dioxygenase" --extra-input -e extraProteins.faa -l 1.0`
+
+Limit BLASTP search against proteins belonging to either *Actinobacteria* or *Proteobacteria* phyla, use offline blasting, avoid specificity score-based filtering for peptides 'SQSDFNLR,HGQRPAHIHFFISAPGHR,LIAAAGWHAWRPAHLHVK', peptides must be considered as detectable by at least 2 CONSeQuence algorithms:\
+```
+pepMANDIS_UNIX.py -m "catechol-1,2-dioxygenase" -b "Actinobacteria|Proteobacteria" --offline-blastp -a "SQSDFNLR,HGQRPAHIHFFISAPGHR,LIAAAGWHAWRPAHLHVK" -cd 2
+```
+
+Avoid gathering of input proteins from UniProt DB and use proteins from file 'myProteins.faa' instead, use 1200 peptides with the highest 
+species coverage for properties calculations, and re-use 'blastp_results_refined.xml' from previous run:\
+```
+pepMANDIS_UNIX_new.py -m "catechol-1,2-dioxygenase" --no-usearch -i myProteins.faa -n 1200 --no-bsearch -I results_catechol12dioxygenase_04_Feb_2021_13.33.21/blastp_results_refined.xml
+```
+
 
 # Licence
 
