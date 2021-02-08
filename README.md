@@ -69,7 +69,8 @@ They can by accessed on Linux/macOS:\
 
 `pepMANDIS.py [options] -m "desired_molecule_name"`\
 e.g. `pepMANDIS.py -m "catechol-1,2-dioxygenase"`\
-or  `python pepMANDIS.py -m "catechol-1,2-dioxygenase"`
+or  `python pepMANDIS.py -m "catechol-1,2-dioxygenase"`\
+or  `py pepMANDIS.py -m "catechol-1,2-dioxygenase"`
 
 Help:\
 `pepMANDIS -h`
@@ -94,7 +95,8 @@ or `python C:\path\to\pepMANDIS.py -m "desired_molecule_name"`
 
 If the script is in your current working directory, execute it by following way:\
 `pepMANDIS.py [options] -m "desired_molecule_name"`\
-or `python pepMANDIS.py -m "desired_molecule_name"`
+or `python pepMANDIS.py -m "desired_molecule_name"`\
+or `py pepMANDIS.py -m "desired_molecule_name"`
 
 # Options
 
