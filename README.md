@@ -92,6 +92,7 @@ Open the terminal (press Windows+R, type 'cmd' and press Enter).
 If path to pepMANDIS.py is not in your environment PATH, execute it as follows:\
 `C:\path\to\pepMANDIS.py [options] -m "desired_molecule_name"`\
 or `python C:\path\to\pepMANDIS.py -m "desired_molecule_name"`
+or `py C:\path\to\pepMANDIS.py -m "desired_molecule_name"`
 
 If the script is in your current working directory, execute it by following way:\
 `pepMANDIS.py [options] -m "desired_molecule_name"`\
