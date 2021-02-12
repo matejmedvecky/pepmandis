@@ -67,7 +67,7 @@ They can by accessed on Linux/macOS:\
 
 # Configuration file
 
-Template of config file (with macOS-like paths):
+Template of 'defaults.cfg' config file (with macOS-like paths):
 ```
 [ChromeDriver]
 path=/Applications/chromedriver
@@ -77,7 +77,7 @@ executable=blastp
 databasePath=/path/to/database/nr
 
 [PeptideSieve]
-executable=PeptideSieve.linux.i386
+executable=PeptideSieve.osx.i386
 propertiesFilePath=/path/to/propertiesFile.txt
 ```
 
