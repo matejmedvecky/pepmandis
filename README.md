@@ -65,6 +65,33 @@ Scripts are located in bin directory:\
 They can by accessed on Linux/macOS:\
 `cd pepmandis/bin`
 
+# Configuration file
+
+Template of config file (with macOS-like paths):
+```
+[ChromeDriver]
+path=/Applications/chromedriver
+
+[blastp]
+executable=blastp
+databasePath=/path/to/database/nr
+
+[PeptideSieve]
+executable=PeptideSieve.linux.i386
+propertiesFilePath=/path/to/propertiesFile.txt
+```
+
+Example of config file for Windows:
+```
+[ChromeDriver]
+path=C:\\Users\\admin\\chromedriver\\chromedriver.exe
+
+[blastp]
+executable=blastp
+databasePath=C:\\Users\\blastdatabase\\nr
+
+```
+
 # Quick start
 
 `pepMANDIS.py [options] -m "desired_molecule_name"`\
