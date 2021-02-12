@@ -40,9 +40,8 @@ Note for Safari users: To enable to control Safari via webdriver, 'Allow Remote 
                        in Safari's Develop menu must be enabled.\
 Note for Chrome users: User system's ChromeDriver must be compatible with the system's Chrome browser
                        version. ChromeDriver can be downloaded from
-                       https://sites.google.com/a/chromium.org/chromedriver/downloads. \ 
-                       Please note that path to chromedriver executable need to be specified in 
-                       a configuration ('defaults.cfg') file.
+                       https://sites.google.com/a/chromium.org/chromedriver/downloads. \
+                       Please note that path to chromedriver executable need to be specified in a configuration ('defaults.cfg') file.
 
 Please note that pyOpenMS is published under 3-clause BSD licence (https://opensource.org/licenses/BSD-3-Clause).
 
