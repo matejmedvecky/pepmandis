@@ -1117,10 +1117,12 @@ class MetaproteomicPipline:
 					sys.stdout.flush()
 					driver = webdriver.Safari()
 				except:
+					traceback.print_exc()
 					sys.stderr.write('Failed to launch Safari browser.\n')
 					sys.stderr.write('Error: Could not open any of web browsers. Please check the manual for troubleshooting.')
 					return False
 			else:
+				traceback.print_exc()
 				sys.stderr.write('Error: Failed to launch Google Chrome browser. Is your chromedriver compatible with Chrome? Please ' \
 					'check the manual for troubleshooting.')
 				return False
