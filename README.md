@@ -35,19 +35,20 @@ Windows: press Windows+R, type `cmd` and press Enter
 
 PepMANDIS pipeline uses either Safari or Chrome web browser for performing CONSeQuence analysis
 (prediction of peptide LC-MS/MS detectability), therefore, one of them need to be installed
-on user's computer. Please note that Chrome is the preferred one since Safari cannot be ran
-in the background.\
+on user's computer. Chrome is the preferred one since Safari cannot be ran in the background.\
 Note for Safari users: To enable to control Safari via webdriver, 'Allow Remote Automation' option
                        in Safari's Develop menu must be enabled.\
 Note for Chrome users: User system's ChromeDriver must be compatible with the system's Chrome browser
                        version. ChromeDriver can be downloaded from
-                       https://sites.google.com/a/chromium.org/chromedriver/downloads.
+                       https://sites.google.com/a/chromium.org/chromedriver/downloads.\ 
+                       Please note that path to chromedriver executable need to be specified in 
+                       a configuration ('defaults.cfg') file.
 
 Please note that pyOpenMS is published under 3-clause BSD licence (https://opensource.org/licenses/BSD-3-Clause).
 
 ## Optional dependencies
 
-- BLAST+ (2.10.0+ High Sierra) & BLAST non-redundant protein database (HIGHLY RECOMMENDED)
+- BLAST+ (2.10.0+ High Sierra) & BLAST non-redundant protein database (HIGHLY RECOMMENDED since large BLAST queries are moved to slower queue)
 - PeptideSieve (0.51)
 
 Non-redundant BLAST database can be downloaded via following FTP:  https://ftp.ncbi.nlm.nih.gov/blast/db/. \
