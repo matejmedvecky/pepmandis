@@ -254,8 +254,8 @@ or `py pepMANDIS.py -m "desired_molecule_name"`
 Gather catechol-1,2-dioxygenase protein entries from UniProt DB, compute basic statistics and exit program:\
 `pepMANDIS.py -m "catechol-1,2-dioxygenase" --stats-only`
 
-Use offline blasting:\
-`pepMANDIS.py -m "catechol-1,2-dioxygenase" --offline-blastp`
+Perform offline blasting using 12 threads:\
+`pepMANDIS.py -m "catechol-1,2-dioxygenase" --offline-blastp -t 12`
 
 Limit BLASTP search against proteins belonging to either *Actinobacteria* or *Proteobacteria* phyla, use offline blasting, avoid specificity score-based filtering for peptides 'SQSDFNLR,HGQRPAHIHFFISAPGHR,LIAAAGWHAWRPAHLHVK', peptides must be considered as detectable by at least 2 CONSeQuence algorithms:\
 ```
