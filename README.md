@@ -50,7 +50,7 @@ Please note that pyOpenMS is published under 3-clause BSD licence (https://opens
 - BLAST+ (2.10.0+ High Sierra) & BLAST non-redundant protein database (HIGHLY RECOMMENDED since large BLAST queries are moved to slower queue)
 - PeptideSieve (0.51)
 
-Non-redundant BLAST database can be downloaded via following FTP:  https://ftp.ncbi.nlm.nih.gov/blast/db/. \
+Non-redundant BLAST database can be downloaded via following FTP:  https://ftp.ncbi.nlm.nih.gov/blast/db/ or by running 'update_blastdb.pl' script from https://www.ncbi.nlm.nih.gov/books/NBK537770/ \
 Please note that path to BLAST NR protein DB need to be specified in a 'defaults.cfg' file. 
 
 Newer versions of macOS won't run PeptideSieve since LD_LIBRARY_PATH and DYLD_LIBRARY_PATH cannot be
