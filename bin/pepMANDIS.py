@@ -19,6 +19,7 @@ import argparse
 import re
 import sys
 import os
+import pathlib
 from pyopenms import AASequence, ProteaseDigestion # pyopenms has issues with Qt*dll files in Windows, therefore, it must be imported before other specific libraries (such as matplotlib)
 import urllib.request, urllib.parse, urllib.error
 import traceback
@@ -148,12 +149,13 @@ class MetaproteomicPipline:
 			type=int, required=False, default=25,
 			)
 		parser.add_argument('-b', '--btaxonomy',
-			help='Limit BLASTP search against proteins belonging to organisms ' \
+			help='Limit ONLINE BLASTP search against proteins belonging to organisms ' \
 				'specified by taxonomy keywords bounded by quotes: for AND use ' \
 				'character \'&\', for OR use character \'|\', for NOT use character ' \
 				'\'-\'. (E.g. "Actinobacteria|Proteobacteria-Pseudomonadales" which ' \
 				'means Actinobacteria OR Proteobacteria without (NOT) ' \
-				'Pseudomonadales). [default: "Bacteria"]',
+				'Pseudomonadales). Please note that in order to limit OFFLINE BLASTP search ' \
+				'by taxomony, user needs to provide file with taxids (see manual). [default: "Bacteria"]',
 			type=str, required=False, default="Bacteria",
 			metavar="\"BLASTP_TAXONOMY\"",
 			)
@@ -252,7 +254,8 @@ class MetaproteomicPipline:
 		return parser.parse_args()
 
 	def get_resultsFolder_name(self, mol):
-		return 'results_%s_%s' % (re.sub('[^a-zA-Z0-9]', '', mol).lower(),
+		return '%s/results_%s_%s' % (pathlib.Path(sys.argv[0]).parent.absolute(),
+			re.sub('[^a-zA-Z0-9]', '', mol).lower(),
 			strftime('%d_%b_%Y_%H.%M.%S', localtime()))
 
 	def parse_config_file(self, configPath):
@@ -570,33 +573,39 @@ class MetaproteomicPipline:
 		return True
 
 	def draw_len_histogram(self, title, minLength, maxLength, removedProteinLengths):
-		if maxLength - minLength > 1500:
-			divider = 3
-		else:
-			divider = 2
-		if removedProteinLengths:
-			if ((removedProteinLengths[-1] - removedProteinLengths[0]) / divider) > 0:
-				remNumOfBins = int((removedProteinLengths[-1] - removedProteinLengths[0])
-								/ divider)
+		try:
+			if maxLength - minLength > 1500:
+				divider = 3
 			else:
-				remNumOfBins = 1
-		keptNumOfBins = int((int(self.proteinEntries[-1][4]) - int(self.proteinEntries[0][4]))
-						/ divider)
-		if keptNumOfBins == 0:
-			keptNumOfBins = 1
-		fig, ax = matplotlib.pyplot.subplots()
-		ax.hist(
-			[int(item[4]) for item in self.proteinEntries],
-			color='blue',
-			bins=keptNumOfBins,
-			label='kept',
-			)
-		if removedProteinLengths:
-			ax.hist(removedProteinLengths, color='red', bins=remNumOfBins, label='discarded')
-		ax.set(xlabel='length [AA]', ylabel='count')
-		matplotlib.pyplot.title(title, fontsize=10, fontweight='bold')
-		matplotlib.pyplot.legend(loc='upper right')
-		matplotlib.pyplot.savefig('%s/length_distribution.uniprot_entries.png' % self.resultsFolder, dpi=400)
+				divider = 2
+			if removedProteinLengths:
+				if ((removedProteinLengths[-1] - removedProteinLengths[0]) / divider) > 0:
+					remNumOfBins = int((removedProteinLengths[-1] - removedProteinLengths[0])
+									/ divider)
+				else:
+					remNumOfBins = 1
+			keptNumOfBins = int((int(self.proteinEntries[-1][4]) - int(self.proteinEntries[0][4]))
+							/ divider)
+			if keptNumOfBins == 0:
+				keptNumOfBins = 1
+			fig, ax = matplotlib.pyplot.subplots()
+			ax.hist(
+				[int(item[4]) for item in self.proteinEntries],
+				color='blue',
+				bins=keptNumOfBins,
+				label='kept',
+				)
+			if removedProteinLengths:
+				ax.hist(removedProteinLengths, color='red', bins=remNumOfBins, label='discarded')
+			ax.set(xlabel='length [AA]', ylabel='count')
+			matplotlib.pyplot.title(title, fontsize=10, fontweight='bold')
+			matplotlib.pyplot.legend(loc='upper right')
+			matplotlib.pyplot.savefig('%s/length_distribution.uniprot_entries.png' % self.resultsFolder, dpi=400)
+			return True
+		except:
+			traceback.print_exc()
+			sys.stderr.write('Error: Unexpected error occurred while drawing histogram. Exiting...\n')
+			return False
 
 	def draw_pie_chart(self, title, labels, fractions, figName, fontSize, labelDist):
 		matplotlib.pyplot.figure(figsize=(6,6))
@@ -709,20 +718,26 @@ class MetaproteomicPipline:
 	def extract_taxonomy_stats(self):
 		sys.stdout.write('Extracting taxonomy statistics...\n')
 		sys.stdout.flush()
-		for phylum in Counter([item[3] for item in self.proteinEntries]).most_common():
-			self.phylumEntries.append([phylum[0]])
-			for protein in self.proteinEntries:
-				if protein[3] == phylum[0]:
-					self.extract_lower_taxonomy(protein, self.phylumEntries[-1])
-		for phylum in self.phylumEntries:
-			for genus in phylum[1:]:
-				genus[1] = OrderedDict(sorted(list(genus[1].items()), key=lambda x: x[1], reverse=True))
-			phylum[1:] = sorted(
-				phylum[1:],
-				key=lambda x_dic: sum(x_dic[1].values()),
-				reverse=True)
-		sys.stdout.write('Done.\n\n')
-		sys.stdout.flush()
+		try:
+			for phylum in Counter([item[3] for item in self.proteinEntries]).most_common():
+				self.phylumEntries.append([phylum[0]])
+				for protein in self.proteinEntries:
+					if protein[3] == phylum[0]:
+						self.extract_lower_taxonomy(protein, self.phylumEntries[-1])
+			for phylum in self.phylumEntries:
+				for genus in phylum[1:]:
+					genus[1] = OrderedDict(sorted(list(genus[1].items()), key=lambda x: x[1], reverse=True))
+				phylum[1:] = sorted(
+					phylum[1:],
+					key=lambda x_dic: sum(x_dic[1].values()),
+					reverse=True)
+			sys.stdout.write('Done.\n\n')
+			sys.stdout.flush()
+			return True
+		except:
+			traceback.print_exc()
+			sys.stderr.write('Error: Unexpected error occurred while extracting taxonomy stats. Exiting...\n')
+			return False
 
 	def print_general_stats(
 			self, args, allCount, allMedian,
@@ -746,7 +761,7 @@ class MetaproteomicPipline:
 								'           -c %d\n' \
 								'           -x %d\n' \
 								'           -y %d\n' \
-								'           -b "%s"\n' \
+								'           -b "%s"\n' \ #TOTO TU ZMAZAT
 								'           -k "%s"\n' \
 								'           -s %.3f\n' \
 								'			-a %s\n' \
@@ -840,11 +855,17 @@ class MetaproteomicPipline:
 					'phyla_pie_chart.uniprot_entries.png',
 					10,
 					1.1)
-				self.draw_len_histogram(args.molecule, allMin, allMax, removedProteinLengths)
+				if not self.draw_len_histogram(args.molecule, allMin, allMax, removedProteinLengths):
+					return False
 				sys.stdout.write('Done.\n\n')
 				sys.stdout.flush()
+				return True
 		except OSError:
 			sys.stderr.write('Error: Could not open %s/initial_info.txt file for writing.' % self.resultsFolder)
+			return False
+		except:
+			traceback.print_exc()
+			sys.stderr.write('Error: Unexpected error occurred while printing general stats. Exiting...\n')
 			return False
 
 	def preprocess_proteins(self, args):
@@ -870,10 +891,12 @@ class MetaproteomicPipline:
 			return False
 		sys.stdout.write('Done.\n\n')
 		sys.stdout.flush()
-		self.extract_taxonomy_stats()
-		self.print_general_stats(
-			args, count, median, mean, minL, maxL, std,
-			[int(item[4]) for item in discardedProteins])
+		if not self.extract_taxonomy_stats():
+			return False
+		if not self.print_general_stats(
+				args, count, median, mean, minL, maxL, std,
+				[int(item[4]) for item in discardedProteins]):
+			return False
 		return True
 
 	def digest_protein(self, seq, cleav, minPep, maxPep):
@@ -1196,16 +1219,26 @@ class MetaproteomicPipline:
 		sys.stdout.flush()
 		return True
 
-	def detect_possible_chem_modifications(self, isExtraInput):
+	def detect_possible_chem_modifications(self, isExtraInput, countLimit):
 		sys.stdout.write('Detecting peptides prone to chemical modifications...\n')
 		sys.stdout.flush()
 		try:
 			with open('%s/possible_chemical_modifications.txt' % self.resultsFolder, 'w') as chmFile:
 				chmFile.write('Peptide\t#\tPossible chemical modifications\n')
+				peptCount = 0
+				peptideEntries = []
 				if isExtraInput:
-					peptideEntries = self.relevantPeptides
+					for peptide in self.relevantPeptides:
+						peptideEntries.append(peptide)
+						peptCount += 1
+						if peptCount == countLimit:
+							break
 				else:
-					peptideEntries = self.peptideEntries
+					for peptide in self.peptideEntries:
+						peptideEntries.append(peptide)
+						peptCount += 1
+						if peptCount == countLimit:
+							break
 				for peptide in peptideEntries:
 					chmCount = 0
 					chmDescript = ''
@@ -1255,7 +1288,7 @@ class MetaproteomicPipline:
 				entrezQuery += "%s[ORGN]" % str(entry)
 		return entrezQuery
 
-	def run_blastp(self, executable, databasePath, inFile, entrezQuery, threads):
+	def run_blastp(self, executable, databasePath, inFile, threads):
 		sys.stdout.write('Offline blastp search in progress...\n')
 		sys.stdout.flush()
 		try:
@@ -1264,14 +1297,14 @@ class MetaproteomicPipline:
 				'-db', databasePath,
 				'-evalue', '1000000.0',
 				'-max_target_seqs', '100',
-				'-word_size', '2',
+				'-word_size', '4',
 				'-gapopen', '9',
 				'-gapextend', '1',
-				'-num_threads', threads,
+				'-num_threads', str(threads),
 				'-matrix', 'PAM30',
-				'threshold', '11',
+				'-threshold', '11',
 				'-outfmt', '5',
-				'-entrez_query', entrezQuery,
+				'-taxidlist', '/Users/matejmedvecky/Documents/hcmr/pipeline/2to3/out/marinomonas.ids',
 				'-query', inFile,
 				'-out', '%s/blastp_results.xml' % self.resultsFolder])
 		except:
@@ -1494,7 +1527,7 @@ class MetaproteomicPipline:
 											else:
 												diffNames.append(align.title)
 									break
-							specFile.write('Peptide: %s\nNumber of full query matches: %d/100\n' % (
+							specFile.write('Peptide: %s\nNumber of full query sequence matches: %d/100\n' % (
 								currentPept[1], fullMatchCount))
 							if fullMatchCount != 0:
 								specScore[1] = 100.0 / fullMatchCount
@@ -1929,7 +1962,7 @@ class MetaproteomicPipline:
 		sys.stdout.flush()
 		return True
 
-def main():# zunifikovat ci maju funkcie ktore moze returnovat True alebo je to jedno
+def main():
 	mp = MetaproteomicPipline()
 	mp.arguments = mp.parse_user_input()
 	mp.resultsFolder = mp.get_resultsFolder_name(mp.arguments.molecule)
@@ -1967,7 +2000,7 @@ def main():# zunifikovat ci maju funkcie ktore moze returnovat True alebo je to 
 			else:
 				if not mp.print_get_most_frequent_peptides(mp.arguments.peptide_calc_count, True):
 					return False
-		if not mp.detect_possible_chem_modifications(mp.arguments.extra_input):
+		if not mp.detect_possible_chem_modifications(mp.arguments.extra_input, mp.arguments.peptide_calc_count):
 			return False
 		if mp.check_for_data_in_config(mp.configData, 'ChromeDriver', 'path'):
 			mp.chromedriverPath = mp.configData.get('ChromeDriver', 'path')
@@ -1996,7 +2029,7 @@ def main():# zunifikovat ci maju funkcie ktore moze returnovat True alebo je to 
 					mp.blast_executable = mp.configData.get('blastp', 'executable')
 					if mp.check_for_data_in_config(mp.configData, 'blastp', 'databasePath'):
 						mp.blastDatabasePath = mp.configData.get('blastp', 'databasePath')
-						if not mp.run_blastp(mp.blast_executable, mp.blastDatabasePath, '%s/*.faa' % mp.resultsFolder, mp.get_entrezQuery(mp.arguments.btaxonomy), mp.arguments.threads):
+						if not mp.run_blastp(mp.blast_executable, mp.blastDatabasePath, '%s/peptide_candidates_for_calculations01.faa' % mp.resultsFolder, mp.arguments.threads):
 							return False
 					else:
 						sys.stderr.write('Error: Could not run offline blastp program.\n')
