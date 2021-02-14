@@ -764,8 +764,8 @@ class MetaproteomicPipline:
 								'           -b "%s"\n' \
 								'           -k "%s"\n' \
 								'           -s %.3f\n' \
-								'			-a %s\n' \
-								'			-cd %d\n' \
+								'           -a %s\n' \
+								'           -cd %d\n' \
 								'           -pd %.3f\n' \
 					            '           -f %d\n' \
 								'           -n %d\n' \
