@@ -63,8 +63,8 @@ to be loaded.
 
 PepMANDIS repository with the souce code can be obtained via git:\
 `git clone https://github.com/matejmedvecky/pepmandis.git`\
-Scripts are located in bin directory:\
-They can by accessed on Linux/macOS:\
+Files are located in bin directory:\
+They can by accessed by following command from current working directory where PepMANDIS repo was cloned:\
 `cd pepmandis/bin`
 
 # Configuration file
