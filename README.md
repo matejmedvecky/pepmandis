@@ -15,13 +15,13 @@ Following list of dependencies need to be installed prior to start using pepMAND
 
 ## Mandatory dependencies
 
-- python 3 (3.7.6 High Sierra, 3.8.5 Windows 10)
-- biopython (1.76 High Sierra, 1.78 Windows 10)
-- matplotlib (3.1.3 High Sierra, 3.3.3 Windows 10)
-- multiprocess (0.70.9 High Sierra, 0.70.11 Windows 10)
-- numpy (1.18.1 High Sierra, 1.19.5 Windows 10)
-- pyopenms (2.4.0 High Sierra, 2.6.0 Windows 10)
-- selenium (3.141.0 High Sierra, Windows 10)
+- python 3 (3.7.6 High Sierra; 3.6.8 CentOS 7; 3.8.5 Windows 10)
+- biopython (1.76 High Sierra, 1.78 CentOS 7, Windows 10)
+- matplotlib (3.1.3 High Sierra; 3.3.4 CentOS 7; 3.3.3 Windows 10)
+- multiprocess (0.70.9 High Sierra; 0.70.11 CentOS 7; Windows 10)
+- numpy (1.18.1 High Sierra; 1.19.5 CentOS 7, Windows 10)
+- pyopenms (2.4.0 High Sierra, CentOS 7; 2.6.0 Windows 10)
+- selenium (3.141.0 High Sierra, CentOS 7, Windows 10)
 
 They can be installed via pip (package installer for Python) in Terminal. E.g. `pip install biopython`.
 If, after installation of pyopenms, ImportError message (Library not loaded) is risen,
