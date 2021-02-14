@@ -53,6 +53,8 @@ Please note that pyOpenMS is published under 3-clause BSD licence (https://opens
 Non-redundant BLAST database can be downloaded via following FTP:  https://ftp.ncbi.nlm.nih.gov/blast/db/ or by running 'update_blastdb.pl' script from https://www.ncbi.nlm.nih.gov/books/NBK537770/ \
 Please note that path to BLAST NR protein DB need to be specified in a 'defaults.cfg' file. 
 
+To limit offline BLASTP search by taxonomy, user needs to provide a file with taxids (see https://www.ncbi.nlm.nih.gov/books/NBK546209/#cookbook.Limiting_a_BLAST_search_with_a). I prepared file 'bacterial.ids' containing all taxids available for Bacteria. It can be found in bin/ directory (along with PepMANDIS source code). Please note that PATH to that file must be specified in 'defaults.cfg' file.
+
 Newer versions of macOS won't run PeptideSieve since LD_LIBRARY_PATH and DYLD_LIBRARY_PATH cannot be
 loaded due to 'System integrity protection'. User must turn it off in order to enable dyld library
 to be loaded.
@@ -108,7 +110,7 @@ or  `py pepMANDIS.py -m "catechol-1,2-dioxygenase"`
 Help:\
 `pepMANDIS -h`
 
-## Linux and macOS
+## UNIX (Linux and macOS)
 
 Open the terminal (press Ctrl+Alt+T in Linux or press Command+Space, type 'terminal' and press Enter in macOS).
 
