@@ -761,7 +761,7 @@ class MetaproteomicPipline:
 								'           -c %d\n' \
 								'           -x %d\n' \
 								'           -y %d\n' \
-								'           -b "%s"\n' \ #TOTO TU ZMAZAT
+								'           -b "%s"\n' \
 								'           -k "%s"\n' \
 								'           -s %.3f\n' \
 								'			-a %s\n' \
