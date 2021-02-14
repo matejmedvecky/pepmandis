@@ -69,7 +69,7 @@ They can by accessed by following command from current working directory where P
 
 # Configuration file
 
-Template of 'defaults.cfg' config file (with macOS-like paths). Please change /path/to/ to actual path to desired files: \
+Template of 'defaults.cfg' config file (with UNIX-like paths). It is included in bin/ directory of this repo. Please change /path/to/ to actual path to desired files: 
 ```
 [ChromeDriver]
 path=/Applications/chromedriver
@@ -93,10 +93,10 @@ path=C:\\Users\\admin\\chromedriver\\chromedriver.exe
 
 [blastp]
 executable=blastp
-databasePath=C:\\Users\\blastdatabase\\nr
+databasePath=C:\\Users\\admin\\blastnrdatabase\\nr
 
 [taxidFile]
-taxidFilePath=C:\\Users\\pepmandis\\bin\\bacterial.ids
+taxidFilePath=C:\\Users\\admin\\pepmandis\\bin\\bacterial.ids
 
 ```
 
