@@ -1288,25 +1288,41 @@ class MetaproteomicPipline:
 				entrezQuery += "%s[ORGN]" % str(entry)
 		return entrezQuery
 
-	def run_blastp(self, executable, databasePath, inFile, threads):
+	def run_blastp(self, executable, databasePath, taxidfilePath, inFile, threads):
 		sys.stdout.write('Offline blastp search in progress...\n')
 		sys.stdout.flush()
 		try:
-			subprocess.call([
-				executable,
-				'-db', databasePath,
-				'-evalue', '1000000.0',
-				'-max_target_seqs', '100',
-				'-word_size', '4',
-				'-gapopen', '9',
-				'-gapextend', '1',
-				'-num_threads', str(threads),
-				'-matrix', 'PAM30',
-				'-threshold', '11',
-				'-outfmt', '5',
-				'-taxidlist', '/Users/matejmedvecky/Documents/hcmr/pipeline/2to3/out/marinomonas.ids',
-				'-query', inFile,
-				'-out', '%s/blastp_results.xml' % self.resultsFolder])
+			if taxidfilePath:
+				subprocess.call([
+					executable,
+					'-db', databasePath,
+					'-evalue', '1000000.0',
+					'-max_target_seqs', '100',
+					'-word_size', '4',
+					'-gapopen', '9',
+					'-gapextend', '1',
+					'-num_threads', str(threads),
+					'-matrix', 'PAM30',
+					'-threshold', '11',
+					'-outfmt', '5',
+					'-taxidlist', 'taxidfilePath',
+					'-query', inFile,
+					'-out', '%s/blastp_results.xml' % self.resultsFolder])
+			else:
+				subprocess.call([
+					executable,
+					'-db', databasePath,
+					'-evalue', '1000000.0',
+					'-max_target_seqs', '100',
+					'-word_size', '4',
+					'-gapopen', '9',
+					'-gapextend', '1',
+					'-num_threads', str(threads),
+					'-matrix', 'PAM30',
+					'-threshold', '11',
+					'-outfmt', '5',
+					'-query', inFile,
+					'-out', '%s/blastp_results.xml' % self.resultsFolder])
 		except:
 			traceback.print_exc()
 			sys.stderr.write('Error: Could not run offline blastp program.\n')
@@ -2029,7 +2045,11 @@ def main():
 					mp.blast_executable = mp.configData.get('blastp', 'executable')
 					if mp.check_for_data_in_config(mp.configData, 'blastp', 'databasePath'):
 						mp.blastDatabasePath = mp.configData.get('blastp', 'databasePath')
-						if not mp.run_blastp(mp.blast_executable, mp.blastDatabasePath, '%s/peptide_candidates_for_calculations01.faa' % mp.resultsFolder, mp.arguments.threads):
+						if mp.check_for_data_in_config(mp.configData, 'taxidFile', 'taxidFilePath'):
+							mp.taxidfilePath = mp.configData.get('taxidFile', 'taxidFilePath')
+						else:
+							mp.taxidfilePath = None
+						if not mp.run_blastp(mp.blast_executable, mp.blastDatabasePath, mp.taxidfilePath, '%s/peptide_candidates_for_calculations01.faa' % mp.resultsFolder, mp.arguments.threads):
 							return False
 					else:
 						sys.stderr.write('Error: Could not run offline blastp program.\n')
