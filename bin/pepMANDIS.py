@@ -751,12 +751,12 @@ class MetaproteomicPipline:
 				 				'           --extra-input %s\n' \
 								'           --custom-url %s\n' \
 								'           --no-bsearch %s\n' \
-					            '           --offline-blastp %s\n' \
+								'           --offline-blastp %s\n' \
 								'           --run-peptidesieve %s\n' \
 								'           -m "%s"\n' \
 								'           -C %s\n' \
 								'           -l %.3f\n' \
-					            '           --no-putatives %s\n' \
+								'           --no-putatives %s\n' \
 								'           -u "%s"\n' \
 								'           -c %d\n' \
 								'           -x %d\n' \
@@ -767,7 +767,7 @@ class MetaproteomicPipline:
 								'           -a %s\n' \
 								'           -cd %d\n' \
 								'           -pd %.3f\n' \
-					            '           -f %d\n' \
+								'           -f %d\n' \
 								'           -n %d\n' \
 								'           -N %d\n' \
 								'           -t %d\n' \
