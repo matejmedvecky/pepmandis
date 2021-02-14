@@ -15,7 +15,7 @@ Following list of dependencies need to be installed prior to start using pepMAND
 
 ## Mandatory dependencies
 
-- python 3 (3.7.6 High Sierra; 3.6.8 CentOS 7; 3.8.5 Windows 10)
+- python 3 (versions used in tests: 3.7.6 High Sierra; 3.6.8 CentOS 7; 3.8.5 Windows 10)
 - biopython (1.76 High Sierra, 1.78 CentOS 7, Windows 10)
 - matplotlib (3.1.3 High Sierra; 3.3.4 CentOS 7; 3.3.3 Windows 10)
 - multiprocess (0.70.9 High Sierra; 0.70.11 CentOS 7; Windows 10)
