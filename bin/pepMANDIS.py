@@ -1305,7 +1305,7 @@ class MetaproteomicPipline:
 					'-matrix', 'PAM30',
 					'-threshold', '11',
 					'-outfmt', '5',
-					'-taxidlist', 'taxidfilePath',
+					'-taxidlist', taxidfilePath,
 					'-query', inFile,
 					'-out', '%s/blastp_results.xml' % self.resultsFolder])
 			else:
@@ -1427,6 +1427,10 @@ class MetaproteomicPipline:
 					return False
 		except OSError:
 			sys.stderr.write('Error: Could not open %s file for reading. Exiting...\n' % inBlastFile)
+			return False
+		except:
+			traceback.print_exc()
+			sys.stderr.write('Error: Unexpected error occurred while refining blast XML file. Exiting...\n')
 			return False
 		sys.stdout.write('Done.\n\n')
 		sys.stdout.flush()
