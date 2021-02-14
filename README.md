@@ -67,7 +67,7 @@ They can by accessed on Linux/macOS:\
 
 # Configuration file
 
-Template of 'defaults.cfg' config file (with macOS-like paths):
+Template of 'defaults.cfg' config file (with macOS-like paths). Please change /path/to/ to actual path to desired files: \
 ```
 [ChromeDriver]
 path=/Applications/chromedriver
@@ -79,6 +79,9 @@ databasePath=/path/to/database/nr
 [PeptideSieve]
 executable=PeptideSieve.osx.i386
 propertiesFilePath=/path/to/propertiesFile.txt
+
+[taxidFile]
+taxidFilePath=/path/to/taxid_file
 ```
 
 Example of config file for Windows:
@@ -89,6 +92,9 @@ path=C:\\Users\\admin\\chromedriver\\chromedriver.exe
 [blastp]
 executable=blastp
 databasePath=C:\\Users\\blastdatabase\\nr
+
+[taxidFile]
+taxidFilePath=C:\\Users\\pepmandis\\bacterial.ids
 
 ```
 
@@ -182,12 +188,13 @@ or `py pepMANDIS.py -m "desired_molecule_name"`
 - `-y`, `--maxs`: Largest size [in AA] of digested peptide to be kept in a dataset. \
   [default: 25]
 
-- `-b`, `--btaxonomy`: Limit BLASTP search against proteins belonging to organisms \
+- `-b`, `--btaxonomy`: Limit *ONLINE* BLASTP search against proteins belonging to organisms \
   specified by taxonomy keywords bounded by quotes: for AND use \
   character '&', for OR use character '|', for NOT use character \
   '-'. (E.g. "Actinobacteria|Proteobacteria-Pseudomonadales" which \
   means Actinobacteria OR Proteobacteria without (NOT) \
-  Pseudomonadales). [default: "Bacteria"]
+  Pseudomonadales). Please note that in order to limit *OFFLINE* BLASTP search \
+	by taxomony, user needs to provide file with taxids (see manual). [default: "Bacteria"]
 
 - `-k`,`--ktaxonomy`: Specified genera/species (genera is represented by just one \
   word; species is represented by just two words separated by space) \
@@ -257,9 +264,9 @@ Gather catechol-1,2-dioxygenase protein entries from UniProt DB, compute basic s
 Perform offline blasting using 12 threads:\
 `pepMANDIS.py -m "catechol-1,2-dioxygenase" --offline-blastp -t 12`
 
-Limit BLASTP search against proteins belonging to either *Actinobacteria* or *Proteobacteria* phyla, use offline blasting, avoid specificity score-based filtering for peptides 'SQSDFNLR,HGQRPAHIHFFISAPGHR,LIAAAGWHAWRPAHLHVK', peptides must be considered as detectable by at least 2 CONSeQuence algorithms:\
+Limit UniProt retrieval to protein entries belonging to either *Actinobacteria* or *Proteobacteria* phyla, perform offline blasting with 12 threads, avoid specificity score-based filtering for peptides 'SQSDFNLR,HGQRPAHIHFFISAPGHR,LIAAAGWHAWRPAHLHVK', peptides must be considered as detectable by at least 2 CONSeQuence algorithms:\
 ```
-pepMANDIS.py -m "catechol-1,2-dioxygenase" -b "Actinobacteria|Proteobacteria" --offline-blastp -a "SQSDFNLR,HGQRPAHIHFFISAPGHR,LIAAAGWHAWRPAHLHVK" -cd 2
+pepMANDIS.py -m "catechol-1,2-dioxygenase" -u "Actinobacteria|Proteobacteria" --offline-blastp -t 12 -a "SQSDFNLR,HGQRPAHIHFFISAPGHR,LIAAAGWHAWRPAHLHVK" -cd 2
 ```
 
 Proteins from file 'extraProteins.faa' will be compared against entries gathered from UniProt DB, set length variation coefficient to 1 (i.e. do not 
