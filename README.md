@@ -243,15 +243,15 @@ or `py pepMANDIS.py -m "desired_molecule_name"`
 
 - `-i`, `--in-aa-file`: Specify path to dataset with protein sequences in FASTA AA format (e.g. \
   infile.faa). Applicable only if `--no-usearch` argument is specified. Following  \
-  header formats are allowed: '>PROTEIN_ID' or '>PROTEIN_ID~COV=\<value\>' if \
+  header formats are allowed: '>PROTEIN\_ID' or '>PROTEIN\_ID\~COV=\<value\>' if \
   coverage (expected copy number) of entries is also provided. \
-  (E.g. >enzyme4552~COV=12.5). Value can be either integer or float larger than 1.0.
+  (E.g. >enzyme4552\~COV=12.5). Value can be either integer or float larger than 1.0.
 
 - `-e`, `--in-extra-aa-file`: Specify path to an extra input fasta AA file (e.g. infile_extra.faa). \
   Applicable only if `--extra-input` argument is specified. Following \
-  header formats are allowed: '>PROTEIN_ID' or '>PROTEIN_ID~COV=\<value\>' in \
+  header formats are allowed: '>PROTEIN\_ID' or '>PROTEIN\_ID\~COV=\<value\>' in \
   case of coverage (expected copy number) of entries is also provided. \
-  (E.g. >enzyme4552~COV=12.5). Value can be either integer or float larger than 1.0.
+  (E.g. >enzyme4552\~COV=12.5). Value can be either integer or float larger than 1.0.
 
 - `-I`, `--in-blastp-file`: Specify path to 'blastp.xml' file generated in previous program \
   run. Applicable only if `--no-bsearch` argument is specified.
