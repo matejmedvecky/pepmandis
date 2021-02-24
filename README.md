@@ -280,7 +280,41 @@ species coverage for properties calculations, and re-use 'blastp_results_refined
 ```
 pepMANDIS.py -m "catechol-1,2-dioxygenase" --no-usearch -i myProteins.faa -n 1200 --no-bsearch -I results_catechol12dioxygenase_04_Feb_2021_13.33.21/blastp_results_refined.xml
 ```
+# Output
 
+## Figures
+
+`genera_pie_chart_1.uniprot_entries.png`: chart illustrating frequencies of occurrence of input proteins (retrieved from UniProt DB) within the genera belonging to the most abundant phylum.
+
+`genera_pie_chart_2.uniprot_entries.png`: chart illustrating frequencies of occurrence of input proteins (retrieved from UniProt DB) within the genera belonging to the second most abundant phylum.
+
+`phyla_pie_chart.uniprot_entries.png`: chart illustrating frequencies of occurrence of input proteins (retrieved from UniProt DB) within the phylum level.
+
+`length_distribution.uniprot_entries.png`: histogram showing the length distribution of input proteins.
+
+## Files
+
+`UniProt_proteins.faa`: FASTA AA file with proteins retrieved from UniProt DB that were used for the downstream analysis.
+
+`initial_info.txt`: file providing information about input parameters as well as summary statistics such as median, mean and standard deviation of protein lengths before and after refinement, and taxonomy statistics (i.e. counts of proteins belonging to different phyla, genera and species).
+
+`peptide_candidates_for_calculations\*.faa`: FASTA AA files with peptides selected for calculations of specific properties.
+
+`peptide_candidates_for_calculations.txt`: tab-delimited file with peptides selected for calculations of specific properties.
+
+`possible_chemical_modifications.txt`: tab-delimited file containing peptides along with information about the number and type of possible chemical modifications of ther AA sequence.
+
+`blastp_results.xml`: XML file with results of BLASTP search.
+
+`blastp_results_refined.xml`: XML file with refined results of BLASTP search.
+
+`peptide_blastp_specificity.txt`
+
+`Peptides_complete_info.txt`
+
+`Selected_peptides.genera`
+
+`Selected_peptides.species`
 
 # Licence
 
