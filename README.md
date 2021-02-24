@@ -294,7 +294,7 @@ pepMANDIS.py -m "catechol-1,2-dioxygenase" --no-usearch -i myProteins.faa -n 120
 
 ## Files
 
-`UniProt_proteins.faa`: FASTA AA file with proteins retrieved from UniProt DB that were used for the downstream analysis.
+`UniProt_proteins.faa`: FASTA AA file with protein sequences retrieved from UniProt DB that were used for the downstream analysis.
 
 `initial_info.txt`: file providing information about input parameters as well as summary statistics such as median, mean and standard deviation of protein lengths before and after refinement, and taxonomy statistics (i.e. counts of proteins belonging to different phyla, genera and species).
 
@@ -302,19 +302,19 @@ pepMANDIS.py -m "catechol-1,2-dioxygenase" --no-usearch -i myProteins.faa -n 120
 
 `peptide_candidates_for_calculations.txt`: tab-delimited file with peptides selected for calculations of specific properties.
 
-`possible_chemical_modifications.txt`: tab-delimited file containing peptides along with information about the number and type of possible chemical modifications of ther AA sequence.
+`possible_chemical_modifications.txt`: tab-delimited file containing peptide sequences along with information about the number and type of possible chemical modifications of ther AA sequences.
 
 `blastp_results.xml`: XML file with results of BLASTP search.
 
 `blastp_results_refined.xml`: XML file with refined results of BLASTP search.
 
-`peptide_blastp_specificity.txt`
+`peptide_blastp_specificity.txt`: file containing information about the synonyms of the target protein generated from BLASTP search as well as information regarding the specificity score calculations.
 
-`Peptides_complete_info.txt`
+`Peptides_complete_info.txt`: tab-delimited file containing all the peptides within the specified length thresholds derived from initial proteins (when primary protein/peptide sequences are compared against a secondary dataset, only the peptides having an exact match are included) together with information, such as AA sequence, frequency of occurrence among proteins, number of different species encoding each peptide, PeptideSieve and CONSeQuence scores, functional specificity score, number of possible chemical modifications and related taxonomy.
 
-`Selected_peptides.genera`
+`Selected_peptides.genera`: list of predicted best target peptides amenable to LC-MS/MS analysis covering as many genera as possible.
 
-`Selected_peptides.species`
+`Selected_peptides.species`: list of predicted best target peptides amenable to LC-MS/MS analysis covering as many species as possible.
 
 # Licence
 
