@@ -229,17 +229,17 @@ class MetaproteomicPipline:
 		parser.add_argument('-i', '--in-aa-file',
 			help='Specify path to dataset with protein sequences in FASTA AA format (e.g. ' \
 				'infile.faa). Applicable only if --no-usearch argument is specified. Following  ' \
-                'header formats are allowed: >PROTEIN_ID or >PROTEIN_ID~COV=<value> if ' \
+                'header formats are allowed: \'>PROTEIN_ID\' or \'>PROTEIN_ID~COV=<value>\' if ' \
                 'coverage (expected copy number) of entries is also provided. ' \
-                'Value can be either integer or float larger than 1.0.',
+                '(E.g. >enzyme4552~COV=12.5). Value can be either integer or float larger than 1.0.',
 			type=str, required='--no-usearch' in sys.argv, default=None,
 			)
 		parser.add_argument('-e', '--in-extra-aa-file',
 			help='Specify path to an extra input fasta AA file (e.g. infile_extra.faa). ' \
 				'Applicable only if --extra-input argument is specified. Following  ' \
-                'header formats are allowed: >PROTEIN_ID or >PROTEIN_ID~COV=<value> in ' \
+                'header formats are allowed: \'>PROTEIN_ID\' or \'>PROTEIN_ID~COV=<value>\' in ' \
                 'case of coverage (expected copy number) of entries is also provided. ' \
-                'Value can be either integer or float larger than 1.0.',
+                '(E.g. >enzyme4552~COV=12.5). Value can be either integer or float larger than 1.0.',
 			type=str, required='--extra-input' in sys.argv, default=None,
 			)
 		parser.add_argument('-I', '--in-blastp-file',
@@ -2026,8 +2026,8 @@ def main():
 			mp.chromedriverPath = mp.configData.get('ChromeDriver', 'path')
 		else:
 			mp.chromedriverPath = None
-		if not mp.run_consequence(mp.arguments.extra_input, mp.chromedriverPath):
-			return False
+		#if not mp.run_consequence(mp.arguments.extra_input, mp.chromedriverPath):
+		#	return False
 		if mp.arguments.run_peptidesieve:
 			if mp.check_for_data_in_config(mp.configData, 'PeptideSieve', 'executable'):
 				mp.ps_executable = mp.configData.get('PeptideSieve', 'executable')
