@@ -2026,8 +2026,8 @@ def main():
 			mp.chromedriverPath = mp.configData.get('ChromeDriver', 'path')
 		else:
 			mp.chromedriverPath = None
-		#if not mp.run_consequence(mp.arguments.extra_input, mp.chromedriverPath):
-		#	return False
+		if not mp.run_consequence(mp.arguments.extra_input, mp.chromedriverPath):
+			return False
 		if mp.arguments.run_peptidesieve:
 			if mp.check_for_data_in_config(mp.configData, 'PeptideSieve', 'executable'):
 				mp.ps_executable = mp.configData.get('PeptideSieve', 'executable')
