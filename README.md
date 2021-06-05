@@ -156,9 +156,7 @@ or `py pepMANDIS.py -m "desired_molecule_name"`
   extract input sequences using provided URL. `--utaxonomy` arg is omitted \
   if this argument is specified.
 
-- `--no-bsearch`: Do not perform BLASTP search. Use this option also if using online blasting and \
-  'blastp.xml' file has already been generated in previous run in order \
-  to save considerable amout of time.
+- `--no-bsearch`: Do not perform BLASTP search.
 
 - `--offline-blastp`: Perform offline blasting (RECOMMENDED). Provide path to nr database (databasePath) in a \
   config file 'defaults.cfg'.
@@ -255,8 +253,9 @@ or `py pepMANDIS.py -m "desired_molecule_name"`
   case of coverage (expected copy number) of entries is also provided. \
   (E.g. >enzyme4552\~COV=12.5). Value can be either integer or float larger than 1.0.
 
-- `-I`, `--in-blastp-file`: Specify path to 'blastp.xml' file generated in previous program \
-  run. Applicable only if `--no-bsearch` argument is specified.
+- `-I`, `--in-blastp-file`: Specify path to \'blastp.xml\' file generated in previous program  \
+  run to be used for functional specificity calculations instead of re-runing  \
+  long-lasting BLASTP search on the same dataset.'
 
 - `--stats-only`: Print general info, protein statistics and figures, and exit.
 
