@@ -4,7 +4,7 @@ PepMANDIS is an automated pipeline that interrogates UniProt or user defined pro
 and computes several protein/peptide properties and associated statistics to deduce a small
 list of the most representative, process-specific and MS-amenable peptides for a microbial
 enzymatic activity of interest. It is written in Python, and was tested on several Linux
-distributions (Fedora, Ubuntu and CentOS), macOS (High Sierra) and Windows (10).
+distributions (Fedora, Ubuntu and CentOS), macOS (High Sierra and Big Sur) and Windows (10).
 
 PLEASE CITE our paper (currently under revision) and/or URL to this GitHub repo (https://github.com/matejmedvecky/pepmandis)
 when using PepMANDIS in your work.
@@ -41,7 +41,9 @@ Note for Safari users: To enable to control Safari via webdriver, 'Allow Remote 
 Note for Chrome users: User system's ChromeDriver must be compatible with the system's Chrome browser
                        version. ChromeDriver can be downloaded from
                        https://sites.google.com/a/chromium.org/chromedriver/downloads. \
-                       Please note that path to chromedriver executable need to be specified in a configuration ('defaults.cfg') file.
+                       Please note that path to chromedriver executable needs to be specified in a configuration ('defaults.cfg') file.\
+		       macOS users can experience following exception: "chromedriver" cannot be opened because the developer cannot be verified.\
+		       This error can be fixed by making macOS trust chromedriver binary: `xattr -d com.apple.quarantine /path/to/chromedriver`.
 
 Please note that pyOpenMS is published under 3-clause BSD licence (https://opensource.org/licenses/BSD-3-Clause).
 
