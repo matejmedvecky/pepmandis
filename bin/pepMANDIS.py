@@ -91,9 +91,7 @@ class MetaproteomicPipline:
 			required=False, action='store_true', default=False,
 			)
 		parser.add_argument('--no-bsearch',
-			help='Do not perform BLASTP search. Use this option also if using online blasting and ' \
-				'\'blastp.xml\' file has already been generated in previous run in order ' \
-				'to save considerable amout of time.',
+			help='Do not perform BLASTP search.',
 			required=False, action='store_true', default=False,
 			)
 		parser.add_argument('--offline-blastp',
@@ -244,8 +242,9 @@ class MetaproteomicPipline:
 			)
 		parser.add_argument('-I', '--in-blastp-file',
 			help='Specify path to \'blastp.xml\' file generated in previous program ' \
-				'run. Applicable only if --no-bsearch argument is specified.',
-			type=str, required='--no-bsearch' in sys.argv, default=None,
+				'run to be used for functional specificity calculations instead of re-runing ' \
+				'long-lasting BLASTP search on the same dataset.',
+			type=str, required=False, default=None,
 			)
 		parser.add_argument('--stats-only',
 			help='Print general info, protein statistics and figures, and exit.',
@@ -2043,7 +2042,7 @@ def main():
 			else:
 				sys.stderr.write('Therefore, PeptideSieve cannot be run. Skipping this step.\n')
 				sys.stdout.flush()
-		if not mp.arguments.no_bsearch:
+		if not mp.arguments.no_bsearch and not mp.arguments.in_blastp_file:
 			if mp.arguments.offline_blastp:
 				if mp.check_for_data_in_config(mp.configData, 'blastp', 'executable'):
 					mp.blast_executable = mp.configData.get('blastp', 'executable')
@@ -2066,7 +2065,7 @@ def main():
 			else:
 				if not mp.perform_qblast_search('blastp', 'nr', [inFile for inFile in glob.glob('%s/*.faa' % mp.resultsFolder)], mp.get_entrezQuery(mp.arguments.btaxonomy), mp.arguments.threads, mp.arguments.timeout):
 					return False
-		if mp.arguments.no_bsearch and mp.arguments.in_blastp_file:
+		if mp.arguments.in_blastp_file:
 			if not mp.refine_blast_file(mp.arguments.in_blastp_file):
 				return False
 			if not mp.get_peptide_specificity(mp.arguments.molecule, '%s/blastp_results_refined.xml' % mp.resultsFolder, mp.arguments.min_synname_length, mp.arguments.extra_input):
