@@ -98,7 +98,7 @@ executable=blastp
 databasePath=C:\\Users\\admin\\blastnrdatabase\\nr
 
 [taxidFile]
-taxidFilePath=C:\\Users\\admin\\pepmandis\\bin\\bacterial.ids
+taxidFilePath=C:\\Users\\admin\\pepmandis\\config\\bacterial.ids
 
 ```
 
