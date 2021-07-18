@@ -9,6 +9,8 @@ distributions (Fedora, Ubuntu and CentOS), macOS (High Sierra and Big Sur) and W
 PLEASE CITE our paper (currently under revision) and/or URL to this GitHub repo (https://github.com/matejmedvecky/pepmandis)
 when using PepMANDIS in your work.
 
+Please do not hesitate to contact the authors if any troubleshooting is needed.
+
 # Installation
 
 Following list of dependencies need to be installed prior to start using pepMANDIS:
