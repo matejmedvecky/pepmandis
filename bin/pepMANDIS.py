@@ -2082,7 +2082,7 @@ def main():
 		if not mp.arguments.extra_input or mp.arguments.no_usearch:
 			if not mp.get_print_highest_coverage_peptides(False, mp.arguments.extra_input, mp.arguments.no_usearch, mp.arguments.peptide_out_count, mp.arguments.ktaxonomy, mp.arguments.specificity, mp.arguments.avoid_spec_filt_list, mp.arguments.pdetectability, mp.arguments.cdetectability, mp.arguments.chemmod_filter):
 				return False
-	sys.stdout.write('\nIf you use PepMANDIS in your research, please CITE our paper:\n\'Medvecky M, Mandalakis M. PepMANDIS: A peptide selection tool for designing function-based targeted proteomic assays in mixed microbial communities\'.\n\n')
+	sys.stdout.write('\nIf you use PepMANDIS in your research, please CITE our paper:\n\'Medvecky M, Mandalakis M. 2021. PepMANDIS: A peptide selection tool for designing function-based targeted proteomic assays in mixed microbial communities. Front Chem. 9:722087. doi: 10.3389/fchem.2021.722087\'.\n\n')
 
 if __name__ == '__main__':
 	main()
