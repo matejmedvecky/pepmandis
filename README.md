@@ -6,7 +6,7 @@ list of the most representative, process-specific and MS-amenable peptides for a
 enzymatic activity of interest. It is written in Python, and was tested on several Linux
 distributions (Fedora, Ubuntu and CentOS), macOS (High Sierra and Big Sur) and Windows (10).
 
-PLEASE CITE our paper (currently under revision) and/or URL to this GitHub repo (https://github.com/matejmedvecky/pepmandis)
+PLEASE CITE our paper (citation is available at the end of this README file) and/or URL to this GitHub repo (https://github.com/matejmedvecky/pepmandis)
 when using PepMANDIS in your work.
 
 Please do not hesitate to contact the authors if any troubleshooting is needed.
@@ -268,8 +268,8 @@ or `py pepMANDIS.py -m "desired_molecule_name"`
 Gather catechol-1,2-dioxygenase protein entries from UniProt DB, compute basic statistics and exit program:\
 `pepMANDIS.py -m "catechol-1,2-dioxygenase" --stats-only`
 
-Perform offline blasting using 12 threads:\
-`pepMANDIS.py -m "catechol-1,2-dioxygenase" --offline-blastp -t 12`
+Perform offline blasting using 12 threads, with path to configuration file specified:\
+`pepMANDIS.py -m "catechol-1,2-dioxygenase" --offline-blastp -t 12 -C /Users/me/Software/pepmandis/config/defaults.cfg`
 
 Limit UniProt retrieval to protein entries belonging to either *Actinobacteria* or *Proteobacteria* phyla, perform offline blasting with 12 threads, avoid specificity score-based filtering for peptides 'SQSDFNLR,HGQRPAHIHFFISAPGHR,LIAAAGWHAWRPAHLHVK', peptides must be considered as detectable by at least 2 CONSeQuence algorithms:\
 ```
@@ -336,4 +336,4 @@ Manolis Mandalakis
 
 # Citation
 
-Medvecky M, Mandalakis M. PepMANDIS: A peptide selection tool for designing function-based targeted proteomic assays in mixed microbial communities. *Currently under revision.*
+Medvecky M, Mandalakis M. PepMANDIS: A peptide selection tool for designing function-based targeted proteomic assays in mixed microbial communities. *Front Chem* 9:722087. doi: 10.3389/fchem.2021.722087
