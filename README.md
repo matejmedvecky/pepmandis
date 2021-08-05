@@ -336,4 +336,4 @@ Manolis Mandalakis
 
 # Citation
 
-Medvecky M, Mandalakis M. PepMANDIS: A peptide selection tool for designing function-based targeted proteomic assays in mixed microbial communities. *Front Chem*. 9:722087. doi: 10.3389/fchem.2021.722087
+Medvecky M, Mandalakis M. (2021). PepMANDIS: A peptide selection tool for designing function-based targeted proteomic assays in mixed microbial communities. *Front Chem*. 9:722087. doi: 10.3389/fchem.2021.722087
