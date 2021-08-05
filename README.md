@@ -268,7 +268,7 @@ or `py pepMANDIS.py -m "desired_molecule_name"`
 Gather catechol-1,2-dioxygenase protein entries from UniProt DB, compute basic statistics and exit program:\
 `pepMANDIS.py -m "catechol-1,2-dioxygenase" --stats-only`
 
-Perform offline blasting using 12 threads, with path to configuration file specified:\
+Perform offline blasting using 12 threads, with path to the configuration file specified:\
 `pepMANDIS.py -m "catechol-1,2-dioxygenase" --offline-blastp -t 12 -C /Users/me/Software/pepmandis/config/defaults.cfg`
 
 Limit UniProt retrieval to protein entries belonging to either *Actinobacteria* or *Proteobacteria* phyla, perform offline blasting with 12 threads, avoid specificity score-based filtering for peptides 'SQSDFNLR,HGQRPAHIHFFISAPGHR,LIAAAGWHAWRPAHLHVK', peptides must be considered as detectable by at least 2 CONSeQuence algorithms:\
@@ -336,4 +336,4 @@ Manolis Mandalakis
 
 # Citation
 
-Medvecky M, Mandalakis M. PepMANDIS: A peptide selection tool for designing function-based targeted proteomic assays in mixed microbial communities. *Front Chem* 9:722087. doi: 10.3389/fchem.2021.722087
+Medvecky M, Mandalakis M. PepMANDIS: A peptide selection tool for designing function-based targeted proteomic assays in mixed microbial communities. *Front Chem*. 9:722087. doi: 10.3389/fchem.2021.722087
